@@ -513,6 +513,7 @@
               </select>
             </label>
             <label class="consent"><input type="checkbox" name="consent" required><span>I agree that Deep Holistics may call or WhatsApp me about Baseline and process my details as described in the <a href="https://deepholistics.com" style="text-decoration:underline">Privacy Policy</a>. I can opt out anytime.</span></label>
+            <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;height:0;width:0;opacity:0">
             <div class="err" id="err" role="alert"></div>
             <button class="btn btn-black" type="submit">Get free consultation first
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></button>
@@ -548,7 +549,7 @@
 </div>
 
 <script>
-  // Form check + demo submit. Nothing is sent anywhere in this sample.
+  // Form check, then submitLead() sends the lead to the Google Sheet.
   const form = document.getElementById('leadForm');
   const err = document.getElementById('err');
   form.addEventListener('submit', (e) => {
@@ -574,13 +575,29 @@
     else { alert('Sample page: the payment link will go here.'); }
   });
 
+  // Leads go to the "Baseline Bengaluru · Leads" Google Sheet through its Apps Script web app.
+  const LEAD_ENDPOINT = 'https://script.google.com/macros/s/AKfycbx7FEVfXp5m8xA3qLh5YLHQ4V2k7Iic_l3ceL1A8y58x0Hh0UzbG62CX5B06FxnJdmp/exec';
   function submitLead(d) {
-    // [PLACEHOLDER] 1. Send d + UTM parameters (utm_source, utm_campaign, utm_content) to the CRM or lead sheet here.
-    // [PLACEHOLDER] 2. On success, fire the conversions:
-    //    gtag('event', 'conversion', { send_to: 'AW-XXXXXXXXX/XXXXXXXX' });   // Google Ads "Lead"
-    //    fbq('track', 'Lead');                                                  // Meta Pixel "Lead"
-    document.getElementById('formWrap').style.display = 'none';
-    document.getElementById('done').style.display = 'block';
+    const q = new URLSearchParams(location.search);
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid'].forEach(k => { d[k] = q.get(k) || ''; });
+    d.page = location.origin + location.pathname;
+    d.consent = 'yes';
+    const btn = form.querySelector('button[type=submit]');
+    btn.disabled = true;
+    btn.firstChild.textContent = 'Sending… ';
+    fetch(LEAD_ENDPOINT, { method: 'POST', mode: 'no-cors', body: new URLSearchParams(d) })
+      .then(() => {
+        // [PLACEHOLDER] Fire the conversions here once the tags are on the page:
+        //    gtag('event', 'conversion', { send_to: 'AW-XXXXXXXXX/XXXXXXXX' });   // Google Ads "Lead"
+        //    fbq('track', 'Lead');                                                  // Meta Pixel "Lead"
+        document.getElementById('formWrap').style.display = 'none';
+        document.getElementById('done').style.display = 'block';
+      })
+      .catch(() => {
+        btn.disabled = false;
+        btn.firstChild.textContent = 'Get free consultation first ';
+        showErr('Could not send. Please check your internet and try again, or WhatsApp us.');
+      });
   }
 </script>
 <script>
