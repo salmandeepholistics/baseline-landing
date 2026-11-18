@@ -527,11 +527,12 @@ footer a{color:#fff}
      1. CONFIG: edit these before going live
      ================================================================ */
   var CONFIG = {
-    // Where leads are POSTed as JSON (your CRM, Zapier/Make webhook, or backend).
-    // Leave empty while testing: the lead is printed to the browser console instead.
-    LEAD_ENDPOINT: '',
-    // Google Ads lead conversion, e.g. 'AW-123456789/AbCdEfGhIj'. Needs gtag.js on the page.
-    GADS_SEND_TO: '',
+    // Leads go to the "Baseline Bengaluru · Leads" Google Sheet through its Apps Script web app
+    // (same endpoint and field names as /dh-baseline-landing).
+    LEAD_ENDPOINT: 'https://script.google.com/macros/s/AKfycbx7FEVfXp5m8xA3qLh5YLHQ4V2k7Iic_l3ceL1A8y58x0Hh0UzbG62CX5B06FxnJdmp/exec',
+    // After a lead is saved we push { event: 'baseline_lead_success' } to the dataLayer.
+    // Your GTM container (GTM-TD6D9QBG) fires the Google Ads "Lead" conversion and GA4 generate_lead on it.
+    LEAD_EVENT: 'baseline_lead_success',
     // "Book test" on the results screen sends people straight here (same link as the homepage "Book Now").
     // UTM tags and gclid are carried through so ad tracking isn't lost.
     BOOK_URL: 'https://app.deepholistics.com/login?mode=signup',
@@ -788,7 +789,12 @@ footer a{color:#fff}
           '</div></div>' +
           '<label class="consent"><input type="checkbox" id="fConsent" name="consent" checked><span>I agree that Deep Holistics may call or WhatsApp me about Baseline. See our <a href="https://deepholistics.com/privacy" target="_blank" rel="noopener">Privacy Policy</a>. I can opt out anytime.</span></label>' +
           '<p class="err" id="eConsent" style="margin-top:-8px;margin-bottom:12px">Please tick the box so we can call you.</p>' +
-          '<button type="submit" class="dhq-btn btn-dark" id="submitBtn">See my results' + ARROW + '</button>' +
+          // Honeypot for bots (same as the current landing page). Real people never see it.
+          '<input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;height:0;width:0;opacity:0">' +
+          // type="button" on purpose: no browser "submit" event, so GTM's generic form-submit trigger doesn't
+          // count failed or duplicate attempts. The lead event is pushed only after a valid lead is sent.
+          '<button type="button" class="dhq-btn btn-dark" id="submitBtn" data-action="submit-lead">See my results' + ARROW + '</button>' +
+          '<p class="err" id="eSend" style="margin-top:10px;text-align:center">Could not send. Please check your internet and try again, or WhatsApp us.</p>' +
           '<p class="micro"><span>✓ No payment</span><span>✓ No obligation</span><span>✓ We call 9 am–9 pm</span></p>' +
         '</form></div>';
     },
@@ -974,9 +980,15 @@ footer a{color:#fff}
   }
   function showErr(id, on, input) { $('#' + id).classList.toggle('show', on); if (input) input.setAttribute('aria-invalid', on ? 'true' : 'false'); }
 
-  function onSubmit(e) {
-    e.preventDefault();
-    var f = e.target, name = f.name.value.trim(), phone = cleanPhone(f.phone.value), consent = f.consent.checked;
+  // Same wording the Google Sheet already gets from the current landing page.
+  var CALL_TIME_LABELS = { asap: 'As soon as possible', morning: 'Morning (9 am – 12 pm)', afternoon: 'Afternoon (12 – 5 pm)', evening: 'Evening (5 – 9 pm)' };
+  var sending = false;
+
+  function onSubmit() {
+    var f = $('#leadForm');
+    if (!f || sending) return;
+    var name = f.name.value.trim(), phone = cleanPhone(f.phone.value), consent = f.consent.checked;
+    showErr('eSend', false);
     var okName = name.length >= 2, okPhone = /^[6-9]\d{9}$/.test(phone);
     showErr('eName', !okName, f.name); showErr('ePhone', !okPhone, f.phone); showErr('eConsent', !consent);
     if (!(okName && okPhone && consent)) {
@@ -984,41 +996,50 @@ footer a{color:#fff}
       track('lead_form_error');
       return;
     }
+    // Bot filled the hidden field: pretend it worked, send nothing.
+    if (f.website && f.website.value) { state.lead = { name: name, phone: phone }; go(STEPS.indexOf('result')); return; }
+
     var matches = computeMatches();
-    var leadId = 'q' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
     state.lead = { name: name, phone: phone };
 
-    var payload = {
-      lead_id: leadId,
-      source_page: 'dh-baseline-quiz',
-      submitted_at: new Date().toISOString(),
-      name: name, phone: '+91' + phone,
-      best_time_to_call: state.callTime, consent_call_whatsapp: true,
-      answers: { feeling: state.a.feel, age: state.ageSet ? state.a.age : null, goals: state.a.goal, family_history: state.a.family, last_blood_test: state.a.last },
-      matched_markers: matches.map(function (m) { return m.name; }),
-      matched_panels: grouped(matches).map(function (g) { return g.key; }),
-      attribution: attribution,
-      landing_url: location.href.split('#')[0]
+    // Field names match the Google Sheet's existing columns (name, mobile, pincode, calltime, consent, utm_*, gclid, page).
+    // The quiz_* fields are extra context; the sheet ignores them unless you add matching columns.
+    var data = {
+      name: name,
+      mobile: phone,
+      pincode: '',
+      calltime: CALL_TIME_LABELS[state.callTime] || state.callTime,
+      consent: 'yes',
+      website: '',
+      utm_source: attribution.utm_source, utm_medium: attribution.utm_medium, utm_campaign: attribution.utm_campaign,
+      utm_term: attribution.utm_term, utm_content: attribution.utm_content, gclid: attribution.gclid,
+      page: location.origin + location.pathname,
+      quiz_feeling: state.a.feel.map(function (v) { return labelOf(FEEL, v); }).join(', '),
+      quiz_age: state.ageSet ? String(state.a.age) : '',
+      quiz_goals: state.a.goal.map(function (v) { return labelOf(GOALS, v); }).join(', '),
+      quiz_family: state.a.family.map(function (v) { return labelOf(FAMILY, v); }).join(', '),
+      quiz_last_test: state.a.last ? labelOf(LAST, state.a.last) : '',
+      quiz_markers: matches.map(function (m) { return m.name; }).join(', ')
     };
 
-    var btn = $('#submitBtn'); btn.disabled = true; btn.textContent = 'Unlocking your results…';
-    sendLead(payload).then(function () {
-      fireConversion(phone, leadId);
+    var btn = $('#submitBtn'); sending = true; btn.disabled = true; btn.textContent = 'Unlocking your results…';
+    sendLead(data).then(function () {
+      sending = false;
+      // Tell GTM a lead was sent (fires Google Ads Lead + GA4 generate_lead), same event as the current landing page.
+      window.dataLayer.push({ event: CONFIG.LEAD_EVENT, call_time: data.calltime, lead_source: 'quiz' });
       go(STEPS.indexOf('result'));
+    }, function () {
+      sending = false;
+      btn.disabled = false; btn.innerHTML = 'See my results' + ARROW;
+      showErr('eSend', true);
+      track('lead_send_error');
     });
   }
-  function sendLead(payload) {
-    if (!CONFIG.LEAD_ENDPOINT) { console.info('[Baseline quiz] Lead captured (set CONFIG.LEAD_ENDPOINT to send it):', payload); return Promise.resolve(); }
-    var req = fetch(CONFIG.LEAD_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), keepalive: true })
-      .catch(function (err) { console.warn('[Baseline quiz] Lead send failed', err); });
-    return Promise.race([req, new Promise(function (r) { setTimeout(r, 4000); })]);
-  }
-  function fireConversion(phone, leadId) {
-    track('lead_submit', { lead_id: leadId });
-    if (CONFIG.GADS_SEND_TO && typeof window.gtag === 'function') {
-      window.gtag('set', 'user_data', { phone_number: '+91' + phone }); // enhanced conversions for leads
-      window.gtag('event', 'conversion', { send_to: CONFIG.GADS_SEND_TO, transaction_id: leadId });
-    }
+  function sendLead(data) {
+    // Same request style as the current landing page: Apps Script doesn't allow CORS, so the response is opaque.
+    var req = fetch(CONFIG.LEAD_ENDPOINT, { method: 'POST', mode: 'no-cors', body: new URLSearchParams(data), keepalive: true });
+    // If Apps Script is slow, don't leave the person waiting: after 10 s, carry on (the request keeps going).
+    return Promise.race([req, new Promise(function (r) { setTimeout(r, 10000); })]);
   }
 
   /* ================================================================
@@ -1040,6 +1061,7 @@ footer a{color:#fff}
         state.callTime = t.getAttribute('data-v');
         $$('[data-action="calltime"]', body).forEach(function (b) { b.setAttribute('aria-pressed', b === t ? 'true' : 'false'); });
         break;
+      case 'submit-lead': onSubmit(); break;
       case 'book': track('book_click'); break;
       case 'whatsapp': track('whatsapp_click'); break;
       case 'restart':
@@ -1056,8 +1078,9 @@ footer a{color:#fff}
     else if (t.name === 'name') showErr('eName', false, t);
   });
   body.addEventListener('change', function (e) { if (e.target.name === 'consent') showErr('eConsent', false); });
-  body.addEventListener('submit', function (e) { if (e.target.id === 'leadForm') onSubmit(e); });
+  body.addEventListener('submit', function (e) { if (e.target.id === 'leadForm') { e.preventDefault(); onSubmit(); } });
   body.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && e.target.closest && e.target.closest('#leadForm') && e.target.tagName === 'INPUT' && e.target.type !== 'checkbox') { e.preventDefault(); onSubmit(); return; }
     if (STEPS[state.step] !== 'age' || e.target.id === 'ageRange') return;
     if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') { e.preventDefault(); setAge(state.a.age - 1); }
     if (e.key === 'ArrowRight' || e.key === 'ArrowUp') { e.preventDefault(); setAge(state.a.age + 1); }
