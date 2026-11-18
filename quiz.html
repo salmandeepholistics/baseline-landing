@@ -160,6 +160,21 @@ h1{font-size:clamp(40px,9vw,68px);line-height:1;margin:16px 0 14px}
 .decades{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:10px}
 .decade{border:1px solid var(--line);background:var(--card);border-radius:var(--pill);padding:9px 0;font-size:14px;font-weight:500;color:var(--ink-2);cursor:pointer;transition:all .15s}
 .decade[aria-pressed="true"]{background:var(--black);border-color:var(--black);color:#fff}
+/* "About you" step: gender + age + height/weight on one screen */
+.about-block{margin-top:18px}
+.about-block:first-of-type{margin-top:6px}
+.about-lbl{display:block;font-size:12px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin:0 0 8px}
+.sex-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.sex-row .decade{padding:12px 0;font-size:15px}
+.about .age-dial{margin:0}
+.about .age-out output{font-size:56px}
+.about .age-step{width:44px;height:44px;font-size:22px}
+.about .range{margin:12px 0 4px}
+.hw{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.unit{position:relative}
+.unit .dhq-input{padding-right:46px;font-variant-numeric:tabular-nums}
+.unit span{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--muted);pointer-events:none}
+.unit-lbl{display:block;font-size:14px;font-weight:500;margin-bottom:6px}
 
 /* ---------- Analyse step ---------- */
 .analyse{text-align:center;padding:14px 0 6px}
@@ -581,6 +596,7 @@ footer a{color:#fff}
     { v: 'never',  e: '✨', l: 'Never had a full one' }
   ];
   var DECADES = [['20s', 25, 18, 29], ['30s', 35, 30, 39], ['40s', 45, 40, 49], ['50s', 55, 50, 59], ['60+', 65, 60, 80]];
+  var SEXES = [{ v: 'male', l: 'Male' }, { v: 'female', l: 'Female' }, { v: 'other', l: 'Other' }];
 
   var PANELS = {
     heart:        { name: 'Heart health',        icon: '❤️', total: 16 },
@@ -622,6 +638,10 @@ footer a{color:#fff}
     'age:35': J(M('heart', 'ApoB'), M('metabolic', 'HbA1c')),
     'age:40': J(M('heart', 'Lp(a)'), M('inflammation', 'hs-CRP'), M('metabolic', 'Fasting insulin')),
     'age:50': J(M('inflammation', 'Homocysteine', 'IL-6'), M('vitamins', 'Vitamin B12'), M('liver', 'eGFR')),
+    'sex:male':   J(M('hormones', 'Testosterone', 'SHBG')),
+    'sex:female': J(M('vitamins', 'Ferritin', 'Iron'), M('blood', 'Haemoglobin'), M('thyroid', 'TSH')),
+    // BMI 23+ is the overweight cut-off used for Indian adults.
+    'bmi:23': J(M('metabolic', 'Fasting insulin', 'HOMA-IR', 'HbA1c'), M('liver', 'ALT')),
     // Used when someone skips every question: the essentials everyone gets walked through.
     'base:essentials': J(M('heart', 'ApoB'), M('metabolic', 'HbA1c', 'Fasting insulin'), M('vitamins', 'Vitamin D', 'Vitamin B12'), M('thyroid', 'TSH'), M('inflammation', 'hs-CRP'))
   };
@@ -639,7 +659,13 @@ footer a{color:#fff}
   /* ================================================================
      3. STATE + HELPERS
      ================================================================ */
-  function freshAnswers() { return { feel: [], age: 32, goal: [], family: [], last: null }; }
+  function freshAnswers() { return { feel: [], age: 32, sex: null, height: '', weight: '', goal: [], family: [], last: null }; }
+  // Height/weight are optional; only sensible values count.
+  function bodyNums() {
+    var h = parseInt(state.a.height, 10), w = parseInt(state.a.weight, 10);
+    h = h >= 120 && h <= 220 ? h : 0; w = w >= 30 && w <= 200 ? w : 0;
+    return { h: h, w: w, bmi: h && w ? Math.round(w / Math.pow(h / 100, 2) * 10) / 10 : 0 };
+  }
   var state = { step: 0, started: false, ageSet: false, locked: false, callTime: 'asap', shown: 0, timers: [], a: freshAnswers(), lead: null };
 
   var $ = function (s, r) { return (r || document).querySelector(s); };
@@ -677,6 +703,9 @@ footer a{color:#fff}
       if (a.age >= 40) out.push(['age:40', r]);
       if (a.age >= 50) out.push(['age:50', r]);
     }
+    if (a.sex === 'male' || a.sex === 'female') out.push(['sex:' + a.sex, a.sex === 'male' ? "men's health" : "women's health"]);
+    var bn = bodyNums();
+    if (bn.bmi >= 23) out.push(['bmi:23', 'your BMI (' + bn.bmi + ')']);
     a.goal.forEach(function (v) { out.push(['goal:' + v, 'goal: ' + labelOf(GOALS, v).toLowerCase()]); });
     a.family.forEach(function (v) { if (v !== 'none') out.push(['family:' + v, 'family history of ' + labelOf(FAMILY, v).toLowerCase()]); });
     // Skipped everything? Still show a useful map once the quiz is done.
@@ -751,7 +780,12 @@ footer a{color:#fff}
   var RENDER = {
     feel: function () { return multiStep(0, 'feel', 'How have you been feeling lately?', 'Pick everything that sounds like you.'); },
     age: function () {
-      return '<div class="dhq-step" data-kind="age">' + head(1, 'How old are you?', 'What we look at changes with each decade.') +
+      return '<div class="dhq-step about sticky-foot" data-kind="age">' + head(1, 'A little about you', 'Age, gender and body size change what we look at.') +
+        '<div class="about-block"><span class="about-lbl" id="sexLbl">Gender</span>' +
+          '<div class="sex-row" role="group" aria-labelledby="sexLbl">' +
+          SEXES.map(function (s) { return '<button type="button" class="decade" data-action="sex" data-v="' + s.v + '" aria-pressed="' + (state.a.sex === s.v) + '">' + s.l + '</button>'; }).join('') +
+        '</div></div>' +
+        '<div class="about-block"><span class="about-lbl">Age</span>' +
         '<div class="age-dial">' +
           '<button type="button" class="age-step" data-action="age-dec" aria-label="One year younger">−</button>' +
           '<span class="age-out"><output id="ageOut" for="ageRange">' + state.a.age + '</output><small>years</small></span>' +
@@ -760,13 +794,17 @@ footer a{color:#fff}
         '<input type="range" class="range" id="ageRange" min="18" max="80" step="1" value="' + state.a.age + '" aria-label="Your age">' +
         '<div class="decades" role="group" aria-label="Jump to an age group">' +
           DECADES.map(function (d) { return '<button type="button" class="decade" data-action="decade" data-age="' + d[1] + '" aria-pressed="false">' + d[0] + '</button>'; }).join('') +
+        '</div></div>' +
+        '<div class="about-block hw">' +
+          '<label><span class="unit-lbl">Height</span><span class="unit"><input class="dhq-input" id="hIn" name="height" type="text" inputmode="numeric" maxlength="3" placeholder="170" autocomplete="off" value="' + esc(state.a.height) + '"><span>cm</span></span></label>' +
+          '<label><span class="unit-lbl">Weight</span><span class="unit"><input class="dhq-input" id="wIn" name="weight" type="text" inputmode="numeric" maxlength="3" placeholder="70" autocomplete="off" value="' + esc(state.a.weight) + '"><span>kg</span></span></label>' +
         '</div>' + nextBtn() + '</div>';
     },
     goal: function () { return multiStep(2, 'goal', 'What are your health goals?', 'Pick all that matter to you right now.'); },
     family: function () { return multiStep(3, 'family', 'Does anything run in your family?', 'Parents, brothers or sisters. Pick all that apply.'); },
     last: function () { return singleStep(4, 'last', 'When was your last full blood test?', 'Any full-body package counts.'); },
     analyse: function () {
-      var lines = ["Reading how you've been feeling", 'Checking markers for your age', 'Adding your family history', 'Matching to 100+ biomarkers', 'Comparing against optimal ranges', 'Building your health map'];
+      var lines = ["Reading how you've been feeling", 'Checking markers for your age and body', 'Adding your family history', 'Matching to 100+ biomarkers', 'Comparing against optimal ranges', 'Building your health map'];
       return '<div class="dhq-step analyse">' +
         '<div class="ring"><svg viewBox="0 0 80 80" aria-hidden="true"><circle class="dhq-bg" cx="40" cy="40" r="34"/><circle class="fg" id="ringFg" cx="40" cy="40" r="34"/></svg><span class="ring-num" id="ringNum">0%</span></div>' +
         '<h2 class="q-title" tabindex="-1" style="text-align:center">Building your health map…</h2>' +
@@ -968,7 +1006,7 @@ footer a{color:#fff}
     out.textContent = a;
     range.value = a;
     range.style.setProperty('--p', ((a - 18) / 62 * 100) + '%');
-    $$('.decade', body).forEach(function (b, i) { var d = DECADES[i]; b.setAttribute('aria-pressed', a >= d[2] && a <= d[3] ? 'true' : 'false'); });
+    $$('[data-action="decade"]', body).forEach(function (b, i) { var d = DECADES[i]; b.setAttribute('aria-pressed', a >= d[2] && a <= d[3] ? 'true' : 'false'); });
   }
 
   /* ---------- Lead form ---------- */
@@ -1003,7 +1041,8 @@ footer a{color:#fff}
     state.lead = { name: name, phone: phone };
 
     // Field names match the Google Sheet's existing columns (name, mobile, pincode, calltime, consent, utm_*, gclid, page).
-    // The quiz_* fields are extra context; the sheet ignores them unless you add matching columns.
+    // The quiz_* fields fill the quiz columns at the end of the sheet (Gender, Age, Height, Weight, ...).
+    var bn = bodyNums();
     var data = {
       name: name,
       mobile: phone,
@@ -1016,6 +1055,9 @@ footer a{color:#fff}
       page: location.origin + location.pathname,
       quiz_feeling: state.a.feel.map(function (v) { return labelOf(FEEL, v); }).join(', '),
       quiz_age: state.ageSet ? String(state.a.age) : '',
+      quiz_gender: state.a.sex ? labelOf(SEXES, state.a.sex) : '',
+      quiz_height: bn.h ? String(bn.h) : '',
+      quiz_weight: bn.w ? String(bn.w) : '',
       quiz_goals: state.a.goal.map(function (v) { return labelOf(GOALS, v); }).join(', '),
       quiz_family: state.a.family.map(function (v) { return labelOf(FAMILY, v); }).join(', '),
       quiz_last_test: state.a.last ? labelOf(LAST, state.a.last) : '',
@@ -1057,6 +1099,11 @@ footer a{color:#fff}
       case 'age-dec': setAge(state.a.age - 1); break;
       case 'age-inc': setAge(state.a.age + 1); break;
       case 'decade': setAge(+t.getAttribute('data-age')); break;
+      case 'sex':
+        state.a.sex = state.a.sex === t.getAttribute('data-v') ? null : t.getAttribute('data-v');
+        $$('[data-action="sex"]', body).forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-v') === state.a.sex ? 'true' : 'false'); });
+        markStarted(); updateCounter();
+        break;
       case 'calltime':
         state.callTime = t.getAttribute('data-v');
         $$('[data-action="calltime"]', body).forEach(function (b) { b.setAttribute('aria-pressed', b === t ? 'true' : 'false'); });
@@ -1074,6 +1121,11 @@ footer a{color:#fff}
   body.addEventListener('input', function (e) {
     var t = e.target;
     if (t.id === 'ageRange') setAge(+t.value);
+    else if (t.id === 'hIn' || t.id === 'wIn') {
+      t.value = t.value.replace(/\D/g, '').slice(0, 3);
+      state.a[t.id === 'hIn' ? 'height' : 'weight'] = t.value;
+      markStarted(); updateCounter();
+    }
     else if (t.name === 'phone') { t.value = t.value.replace(/[^\d\s+]/g, ''); showErr('ePhone', false, t); }
     else if (t.name === 'name') showErr('eName', false, t);
   });
@@ -1081,7 +1133,7 @@ footer a{color:#fff}
   body.addEventListener('submit', function (e) { if (e.target.id === 'leadForm') { e.preventDefault(); onSubmit(); } });
   body.addEventListener('keydown', function (e) {
     if (e.key === 'Enter' && e.target.closest && e.target.closest('#leadForm') && e.target.tagName === 'INPUT' && e.target.type !== 'checkbox') { e.preventDefault(); onSubmit(); return; }
-    if (STEPS[state.step] !== 'age' || e.target.id === 'ageRange') return;
+    if (STEPS[state.step] !== 'age' || e.target.id === 'ageRange' || e.target.tagName === 'INPUT') return;
     if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') { e.preventDefault(); setAge(state.a.age - 1); }
     if (e.key === 'ArrowRight' || e.key === 'ArrowUp') { e.preventDefault(); setAge(state.a.age + 1); }
   });
