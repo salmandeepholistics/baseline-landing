@@ -1,0 +1,1106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Free 60-second health check | Deep Holistics</title>
+<meta name="description" content="Free 60-second health check. Tell us how you feel and see which of 100+ blood markers matter for you. Home collection across Bengaluru, results in 48 hours.">
+<!-- Paid-traffic landing page: keep it out of organic search so it doesn't compete with your main site. -->
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#000000">
+
+<!-- ==== TRACKING: paste your Google Tag Manager or gtag.js snippet here ==== -->
+
+<!-- Brand font: Futurluxe, served from the Deep Holistics Webflow CDN. Jost is the fallback if it can't load. -->
+<link rel="preconnect" href="https://cdn.prod.website-files.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+@font-face{font-family:"Futurluxe";src:url("https://cdn.prod.website-files.com/6224f556a57abc5c34a2634b/67c72ce390ea72f608812805_FuturLuxe-Light.ttf") format("truetype");font-weight:300;font-style:normal;font-display:swap}
+@font-face{font-family:"Futurluxe";src:url("https://cdn.prod.website-files.com/6224f556a57abc5c34a2634b/67c72ce2edae37c5984fd308_FuturLuxe-Regular.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Futurluxe";src:url("https://cdn.prod.website-files.com/6224f556a57abc5c34a2634b/67c72ce28af9fc9d6bb43fe8_FuturLuxe-Medium.ttf") format("truetype");font-weight:500;font-style:normal;font-display:swap}
+
+/* ---------- Deep Holistics brand tokens (taken from deepholistics.com) ---------- */
+:root{
+  --black:#181818; --pure:#000000; --white:#ffffff;
+  --bg-2:#f5f5f5; --bg-3:#f1f3f6; --card:#f9f9fa; --grey-01:#eeeef1;
+  --ink:#181818; --ink-2:#3d3d48; --muted:#6c6c7f; --line:#e4e4ea; --line-2:#d3d3da;
+  --mint:#d6ffeb; --mint-ink:#00381e; --lav:#f1e6ff; --lav-ink:#390764; --peach:#fff2eb; --peach-ink:#7a3410;
+  --wa:#24d366; --danger:#d93a2b;
+  --font:"Futurluxe","Jost",Arial,sans-serif;
+  --pill:3rem; --r:16px; --shadow:4px 4px 20px rgba(0,0,0,.05);
+  --tight:-.04em;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--white);color:var(--ink);font:400 16px/1.45 var(--font);letter-spacing:.2px;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+button,input{font-family:inherit;letter-spacing:inherit;color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+h1,h2,h3{font-weight:400;letter-spacing:var(--tight)}
+
+/* ---------- Floating black pill nav (as on deepholistics.com) ---------- */
+.topbar{position:sticky;top:8px;z-index:40;padding:0 8px;height:64px}
+.nav{max-width:1180px;margin:0 auto;height:56px;background:var(--pure);border-radius:999px;display:flex;align-items:center;justify-content:space-between;padding:0 8px 0 24px;box-shadow:0 10px 30px -12px rgba(0,0,0,.5)}
+.nav img{height:19px;width:auto}
+.call{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:500;font-size:14.5px;padding:10px 16px;border-radius:var(--pill);background:var(--white);color:var(--black)}
+.call svg{width:16px;height:16px}
+@media (max-width:420px){.call span{display:none}.call{padding:11px}}
+
+/* ---------- Hero (dark, rounded, like the brand homepage hero) ---------- */
+.hero{position:relative;margin:-64px 8px 0;border-radius:28px;padding:96px 0 32px;color:var(--white);overflow:hidden;
+  background:
+    radial-gradient(600px 420px at 85% 10%, rgba(40,92,140,.55), transparent 70%),
+    radial-gradient(520px 380px at 0% 90%, rgba(20,60,96,.45), transparent 70%),
+    var(--pure)}
+.hero-grid{position:relative;display:grid;gap:22px;grid-template-areas:"copy" "quiz" "trust"}
+.hero-copy{grid-area:copy}
+.quiz{grid-area:quiz}
+.trust{grid-area:trust}
+@media (min-width:920px){
+  .hero{padding:132px 0 64px}
+  .hero-grid{grid-template-columns:1fr 1.08fr;grid-template-areas:"copy quiz" "trust quiz";grid-template-rows:auto 1fr;column-gap:56px;row-gap:28px;align-items:start}
+}
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;letter-spacing:.6px;text-transform:uppercase;padding:6px 12px;border-radius:96px;background:var(--mint);color:var(--mint-ink)}
+.tag.lav{background:var(--lav);color:var(--lav-ink)}
+.tag.dark{background:rgba(255,255,255,.12);color:#fff}
+.tag i{width:7px;height:7px;border-radius:50%;background:#2fd58a;box-shadow:0 0 0 4px rgba(47,213,138,.25);animation:pulse 2s infinite}
+h1{font-size:clamp(40px,9vw,68px);line-height:1;margin:16px 0 14px}
+.sub{font-size:clamp(21px,3.2vw,28px);line-height:1.2;letter-spacing:-.02em;color:#fff;margin:0 0 10px;max-width:24ch}
+.lede{font-size:clamp(16.5px,2.1vw,19px);font-weight:300;color:#d3d3da;margin:0;max-width:38ch;line-height:1.45}
+.lede b{font-weight:500;color:#fff}
+.trust{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.trust li{display:flex;gap:10px;align-items:center;font-size:14px;font-weight:500;line-height:1.25;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:10px 12px}
+.trust li svg{flex:none;width:28px;height:28px;padding:6px;border-radius:9px;background:rgba(255,255,255,.1);color:#fff}
+.trust li small{display:block;font-weight:300;color:#a1a1af;font-size:12.5px}
+@media (max-width:919px){
+  body.quiz-active .hero-copy{display:none}
+  body.quiz-active .hero{padding-top:80px}
+}
+
+/* ---------- Quiz card ---------- */
+.quiz{background:var(--white);color:var(--ink);border-radius:24px;box-shadow:0 30px 60px -30px rgba(0,0,0,.6);overflow:hidden;overflow:clip;scroll-margin-top:80px;position:relative}
+.quiz-head{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid var(--line)}
+.back{flex:none;width:36px;height:36px;border-radius:50%;border:1px solid var(--line-2);background:#fff;display:grid;place-items:center;cursor:pointer;transition:background .15s}
+.back:hover{background:var(--bg-3)}
+.back svg{width:18px;height:18px}
+.back[aria-hidden="true"]{visibility:hidden}
+.progress{flex:1;height:6px;background:var(--grey-01);border-radius:99px;overflow:hidden}
+.progress span{display:block;height:100%;width:6%;border-radius:99px;background:var(--black);transition:width .5s cubic-bezier(.2,.8,.2,1)}
+.counter{flex:none;display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:500;color:var(--mint-ink);background:var(--mint);padding:6px 11px;border-radius:96px;white-space:nowrap}
+.counter b{font-weight:500;font-variant-numeric:tabular-nums;font-size:14px}
+.counter.bump{animation:bump .45s cubic-bezier(.2,.8,.2,1)}
+.quiz-body{padding:20px 16px 22px;min-height:440px}
+@media (min-width:600px){.quiz-body{padding:26px 28px 30px}}
+
+.step{animation:stepIn .38s cubic-bezier(.2,.8,.2,1) both}
+.q-kicker{display:inline-block;font-size:11.5px;font-weight:500;letter-spacing:.3px;color:#fff;background:var(--black);border-radius:14px;padding:4px 10px;margin:0 0 12px}
+.q-title{font-size:clamp(26px,5vw,32px);line-height:1.08;margin:0 0 6px;outline:none}
+.q-hint{color:var(--muted);margin:0 0 16px;font-size:15px;font-weight:300}
+
+.opts{display:grid;gap:8px}
+.opts-grid{grid-template-columns:1fr 1fr}
+.opt{position:relative;display:flex;align-items:center;gap:10px;text-align:left;font-size:15px;font-weight:400;line-height:1.2;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 30px 10px 10px;min-height:58px;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .12s, border-color .15s, background .15s, box-shadow .2s}
+.opt:hover{border-color:var(--line-2);background:#fff}
+.opt:active{transform:scale(.97)}
+.opt:focus-visible,.btn:focus-visible,.seg button:focus-visible,.decade:focus-visible,.age-step:focus-visible,.back:focus-visible{outline:2px solid var(--black);outline-offset:2px}
+.opt.wide{grid-column:1/-1}
+.opt-emoji{flex:none;width:36px;height:36px;border-radius:10px;background:#fff;display:grid;place-items:center;font-size:19px;box-shadow:inset 0 0 0 1px var(--line);transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
+.opt-check{position:absolute;top:50%;right:10px;margin-top:-9px;width:18px;height:18px;border-radius:50%;border:1.5px solid var(--line-2);background:#fff;transition:all .15s}
+.opt[aria-pressed="true"]{border-color:var(--black);background:#fff;box-shadow:0 0 0 1px var(--black), var(--shadow)}
+.opt[aria-pressed="true"] .opt-emoji{transform:scale(1.12) rotate(-6deg);background:var(--mint);box-shadow:none}
+.opt[aria-pressed="true"] .opt-check{background:var(--black);border-color:var(--black)}
+.opt[aria-pressed="true"] .opt-check::after{content:"";position:absolute;left:5px;top:2px;width:4px;height:8px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+@media (max-width:420px){.opt{gap:8px;padding:9px 26px 9px 9px;font-size:14.5px}.opt-emoji{width:34px;height:34px;font-size:18px}.opt-check{right:8px;width:16px;height:16px;margin-top:-8px}.opt[aria-pressed="true"] .opt-check::after{left:4px;top:1px}}
+@media (max-width:360px){.opt{font-size:13.5px}.opt-emoji{width:30px;height:30px;font-size:16px}}
+
+.insight{display:flex;gap:8px;align-items:flex-start;margin:14px 0 0;font-size:14px;line-height:1.4;color:var(--mint-ink);background:var(--mint);border-radius:12px;padding:10px 12px;min-height:44px;transition:opacity .2s}
+.insight b{font-weight:500}
+.insight:empty{opacity:0}
+.step-foot{margin-top:16px}
+/* Keep the Continue button in reach on long steps */
+.sticky-foot .step-foot{position:sticky;bottom:0;z-index:3;margin:16px -16px -22px;padding:12px 16px calc(14px + env(safe-area-inset-bottom));background:linear-gradient(rgba(255,255,255,0),#fff 28%)}
+@media (min-width:600px){.sticky-foot .step-foot{margin:16px -28px -30px;padding:12px 28px 24px}}
+
+/* ---------- Buttons (pill, as on deepholistics.com) ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;width:100%;font-weight:500;font-size:16px;line-height:1.2;border-radius:var(--pill);padding:16px 22px;border:0;cursor:pointer;text-decoration:none;text-align:center;transition:transform .12s, background .15s, box-shadow .2s, opacity .2s}
+.btn:active{transform:scale(.98)}
+.btn-dark{background:var(--black);color:#fff}
+.btn-dark:hover{background:#000}
+.btn-light{background:#fff;color:var(--black)}
+.btn-light:hover{background:var(--bg-3)}
+.btn-ghost{background:#fff;color:var(--ink);border:1px solid var(--line-2)}
+.btn-ghost:hover{border-color:var(--black)}
+.btn:disabled{opacity:.6;cursor:progress}
+.btn .stack{display:flex;flex-direction:column;align-items:center}
+.btn small{display:block;font-weight:300;font-size:12.5px;opacity:.8;margin-top:2px}
+.btn svg{width:18px;height:18px;flex:none}
+.btn .arr{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.14)}
+.btn-light .arr{background:var(--grey-01)}
+.btn .arr svg{width:14px;height:14px}
+.linkbtn{background:none;border:0;padding:6px;color:var(--muted);font-size:13.5px;text-decoration:underline;cursor:pointer}
+
+/* ---------- Age step ---------- */
+.age-dial{display:flex;align-items:center;justify-content:center;gap:20px;margin:6px 0 4px}
+.age-step{width:50px;height:50px;border-radius:50%;border:1px solid var(--line-2);background:#fff;font-size:26px;line-height:1;cursor:pointer;display:grid;place-items:center;transition:background .15s,transform .1s}
+.age-step:hover{background:var(--bg-3)}
+.age-step:active{transform:scale(.92)}
+.age-out{display:block;text-align:center;min-width:3ch}
+.age-out output{display:block;font-size:80px;line-height:1;letter-spacing:var(--tight);font-variant-numeric:tabular-nums}
+.age-out small{display:block;margin-top:4px;font-size:12px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+.range{-webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:99px;margin:18px 0 6px;background:linear-gradient(90deg,var(--black) var(--p,22%),var(--grey-01) var(--p,22%));outline:none;cursor:pointer}
+.range::-webkit-slider-thumb{-webkit-appearance:none;width:30px;height:30px;border-radius:50%;background:#fff;border:2px solid var(--black);box-shadow:0 4px 10px rgba(0,0,0,.18);transition:transform .15s}
+.range:active::-webkit-slider-thumb{transform:scale(1.15)}
+.range::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:#fff;border:2px solid var(--black);box-shadow:0 4px 10px rgba(0,0,0,.18)}
+.range:focus-visible{box-shadow:0 0 0 4px rgba(0,0,0,.1)}
+.decades{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:10px}
+.decade{border:1px solid var(--line);background:var(--card);border-radius:var(--pill);padding:9px 0;font-size:14px;font-weight:500;color:var(--ink-2);cursor:pointer;transition:all .15s}
+.decade[aria-pressed="true"]{background:var(--black);border-color:var(--black);color:#fff}
+
+/* ---------- Analyse step ---------- */
+.analyse{text-align:center;padding:14px 0 6px}
+.ring{position:relative;width:120px;height:120px;margin:4px auto 18px}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:6}
+.ring .bg{stroke:var(--grey-01)}
+.ring .fg{stroke:var(--black);stroke-linecap:round;stroke-dasharray:213.6;stroke-dashoffset:213.6}
+.ring-num{position:absolute;inset:0;display:grid;place-items:center;font-size:30px;letter-spacing:var(--tight);font-variant-numeric:tabular-nums}
+.checklist{list-style:none;padding:0;margin:18px auto 0;max-width:340px;text-align:left;display:grid;gap:10px}
+.checklist li{display:flex;align-items:center;gap:10px;font-size:15.5px;color:var(--muted);transition:color .3s}
+.checklist li i{flex:none;width:22px;height:22px;border-radius:50%;border:1.5px solid var(--line-2);position:relative;transition:all .3s}
+.checklist li.done{color:var(--ink)}
+.checklist li.done i{background:var(--black);border-color:var(--black)}
+.checklist li.done i::after{content:"";position:absolute;left:6px;top:2px;width:5px;height:10px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+
+/* ---------- Lead step ---------- */
+.preview{position:relative;margin:0 0 18px;border-radius:16px;overflow:hidden;max-height:178px}
+.preview-cards{filter:blur(4.5px);opacity:.9;pointer-events:none;user-select:none}
+.preview::after{content:"";position:absolute;left:0;right:0;bottom:0;height:60px;background:linear-gradient(transparent,#fff)}
+.preview-lock{position:absolute;inset:0;display:grid;place-items:center;z-index:2}
+.preview-lock span{background:var(--black);color:#fff;font-weight:500;font-size:13.5px;padding:9px 16px;border-radius:var(--pill);box-shadow:0 10px 20px -8px rgba(0,0,0,.4)}
+.field{margin-bottom:14px}
+.field label,.field .label{display:block;font-size:14px;font-weight:500;margin-bottom:6px}
+.input{width:100%;height:52px;border:1px solid var(--line-2);border-radius:12px;padding:0 14px;font-size:16px;font-weight:400;color:var(--ink);background:#fff;transition:border-color .15s, box-shadow .15s}
+.input::placeholder{color:#a1a1af}
+.input:focus{outline:none;border-color:var(--black);box-shadow:0 0 0 4px rgba(0,0,0,.06)}
+.input[aria-invalid="true"]{border-color:var(--danger)}
+.phone{display:flex}
+.phone span{display:grid;place-items:center;padding:0 12px;border:1px solid var(--line-2);border-right:0;border-radius:12px 0 0 12px;background:var(--card);font-weight:500;color:var(--ink-2)}
+.phone .input{border-radius:0 12px 12px 0}
+.two{display:grid;grid-template-columns:1.35fr 1fr;gap:10px}
+@media (max-width:420px){.two{grid-template-columns:1fr;gap:0}}
+.hint{font-size:12.5px;margin-top:6px;min-height:18px;color:var(--muted)}
+.hint.ok{color:#0d7a45;font-weight:500}
+.hint.warn{color:#9a5a00;font-weight:500}
+.err{color:var(--danger);font-size:12.5px;font-weight:500;margin-top:5px;display:none}
+.err.show{display:block}
+.seg{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.seg button{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:8px 2px;font-size:13.5px;font-weight:500;line-height:1.2;cursor:pointer;transition:all .15s}
+.seg button small{display:block;font-size:11px;font-weight:300;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--black);border-color:var(--black);color:#fff}
+.seg button[aria-pressed="true"] small{color:rgba(255,255,255,.75)}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.45;color:var(--muted);margin:4px 0 14px;cursor:pointer;font-weight:300}
+.consent input{flex:none;width:19px;height:19px;margin:1px 0 0;accent-color:var(--black)}
+.micro{display:flex;justify-content:center;flex-wrap:wrap;gap:4px 12px;font-size:12.5px;color:var(--muted);margin-top:12px;text-align:center}
+
+/* ---------- Result step ---------- */
+.callout{display:flex;gap:10px;align-items:flex-start;border-radius:14px;padding:12px 14px;font-size:14.5px;line-height:1.45;margin:14px 0 16px}
+.callout b{font-weight:500}
+.callout.good{background:var(--mint);color:var(--mint-ink)}
+.callout.warn{background:var(--peach);color:var(--peach-ink)}
+.callout .ic{font-size:18px;line-height:1.2}
+.pcard{border:1px solid var(--line);border-radius:16px;padding:14px;background:var(--card);margin-bottom:10px;animation:stepIn .45s cubic-bezier(.2,.8,.2,1) both}
+.pcard-head{display:flex;align-items:center;gap:12px}
+.pcard-icon{flex:none;width:40px;height:40px;border-radius:12px;background:#fff;box-shadow:inset 0 0 0 1px var(--line);display:grid;place-items:center;font-size:20px}
+.pcard h3{margin:0;font-size:18px;line-height:1.15;letter-spacing:-.02em}
+.pcard-head p{margin:2px 0 0;font-size:12.5px;color:var(--muted)}
+.meter{height:5px;background:var(--grey-01);border-radius:99px;margin:12px 0 10px;overflow:hidden}
+.meter span{display:block;height:100%;border-radius:99px;background:var(--black)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:13px;font-weight:400;background:#fff;border:1px solid var(--line);color:var(--ink);padding:5px 10px;border-radius:96px}
+.why{font-size:12.5px;color:var(--muted);margin:10px 0 0;line-height:1.45;font-weight:300}
+.why b{color:var(--ink-2);font-weight:500}
+.more{margin:4px 0 14px}
+.more summary{cursor:pointer;font-weight:500;font-size:14.5px;padding:6px 0;list-style:none;text-decoration:underline;text-underline-offset:3px}
+.more summary::-webkit-details-marker{display:none}
+.more[open] summary{margin-bottom:8px}
+.result-ctas{display:grid;gap:10px;margin-top:6px}
+.fine{font-size:12px;color:var(--muted);margin:14px 0 0;line-height:1.5;font-weight:300}
+.hl{font-weight:500}
+
+/* ---------- Content sections ---------- */
+section.block{padding:64px 0}
+section.block.alt{background:var(--bg-2)}
+.sec-head{text-align:center;max-width:720px;margin:0 auto 32px}
+h2.sec{font-size:clamp(32px,5.4vw,52px);line-height:1.08;margin:14px 0 12px}
+.sec-sub{color:var(--ink-2);margin:0 auto;max-width:56ch;font-size:16.5px;font-weight:300}
+.steps{display:grid;gap:12px}
+@media (min-width:760px){.steps{grid-template-columns:repeat(4,1fr)}}
+.stepcard{background:var(--card);border-radius:var(--r);padding:20px;box-shadow:var(--shadow)}
+.alt .stepcard{background:#fff}
+.stepcard .n{display:inline-block;font-size:11.5px;font-weight:500;color:#fff;background:var(--black);border-radius:14px;padding:4px 10px;margin-bottom:14px}
+.stepcard.new .n{background:var(--mint);color:var(--mint-ink)}
+.stepcard h3{margin:0 0 6px;font-size:21px;line-height:1.15}
+.stepcard p{margin:0;color:var(--muted);font-size:15px;font-weight:300}
+.panels{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (min-width:760px){.panels{grid-template-columns:repeat(4,1fr);gap:12px}}
+.panel{position:relative;background:#fff;border-radius:var(--r);padding:18px;box-shadow:var(--shadow);border:1px solid transparent;transition:border-color .3s, box-shadow .3s}
+.panel .pi{font-size:22px}
+.panel h3{margin:10px 0 2px;font-size:17px;line-height:1.2;letter-spacing:-.01em}
+.panel p{margin:0;font-size:34px;line-height:1.05;letter-spacing:var(--tight)}
+.panel p small{font-size:13px;color:var(--muted);letter-spacing:.2px}
+.panel .ftag{display:none;position:absolute;top:12px;right:12px;font-size:11px;font-weight:500;letter-spacing:.4px;text-transform:uppercase;background:var(--mint);color:var(--mint-ink);padding:3px 9px;border-radius:96px}
+.panel.is-matched{border-color:var(--black)}
+.panel.is-matched .ftag{display:block}
+.compare-wrap{background:#fff;border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.compare{width:100%;border-collapse:collapse;font-size:15px}
+.compare th,.compare td{padding:14px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+.compare tr:last-child td{border-bottom:0}
+.compare thead th{font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);background:var(--card)}
+.compare thead th.us{color:#fff;background:var(--black)}
+.compare td.us{background:var(--card);color:var(--ink)}
+.compare td:first-child{font-weight:500;width:26%}
+.compare td.them{color:var(--muted);font-weight:300}
+@media (max-width:560px){.compare{font-size:13.5px}.compare th,.compare td{padding:11px 9px}}
+.note{font-size:12.5px;color:var(--muted);margin-top:12px;text-align:center;font-weight:300}
+.experts{display:grid;gap:16px}
+@media (min-width:760px){.experts{grid-template-columns:1fr 1fr;gap:20px}}
+.expert{display:grid;grid-template-columns:120px 1fr;gap:18px;align-items:center;background:var(--card);border-radius:var(--r);padding:14px;box-shadow:var(--shadow)}
+.expert img{width:120px;height:120px;object-fit:cover;object-position:top;border-radius:12px;background:var(--grey-01)}
+.expert h3{margin:0 0 8px;font-size:22px;line-height:1.1}
+.expert .tag{margin-bottom:8px}
+.expert .cred{margin:0;font-size:13px;color:var(--muted);font-weight:300}
+@media (max-width:400px){.expert{grid-template-columns:92px 1fr;gap:14px}.expert img{width:92px;height:92px}.expert h3{font-size:19px}}
+.offer{display:grid;gap:22px;background:var(--pure);color:#fff;border-radius:28px;padding:28px 20px;overflow:hidden;position:relative}
+.offer::before{content:"";position:absolute;width:520px;height:520px;right:-180px;top:-220px;background:radial-gradient(circle,rgba(40,92,140,.55),transparent 65%)}
+.offer > *{position:relative}
+@media (min-width:860px){.offer{grid-template-columns:1.1fr .9fr;padding:48px;align-items:center}}
+.offer h2.sec{color:#fff;margin-top:14px}
+.offer ul{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+.offer li{display:flex;gap:12px;align-items:flex-start;font-size:16px;font-weight:300;color:#e6e6eb}
+.offer li::before{content:"";flex:none;width:20px;height:20px;margin-top:1px;border-radius:50%;background:rgba(255,255,255,.14) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M6 10.5l2.5 2.5L14 7.5' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/20px no-repeat}
+.price-box{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:24px}
+.price{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.price b{font-size:52px;font-weight:400;line-height:1;letter-spacing:var(--tight)}
+.price s{color:#a1a1af;font-size:19px}
+.price-box p{margin:10px 0 20px;color:#c5c5ce;font-size:14.5px;font-weight:300}
+.faq{max-width:780px;margin:0 auto}
+.faq details{background:var(--card);border-radius:var(--r);margin-bottom:10px}
+.alt .faq details{background:#fff}
+.faq summary{cursor:pointer;list-style:none;padding:18px 52px 18px 20px;font-size:17px;font-weight:400;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:20px;top:50%;transform:translateY(-50%);font-size:24px;font-weight:300;transition:transform .2s}
+.faq details[open] summary::after{transform:translateY(-50%) rotate(45deg)}
+.faq details p{margin:0;padding:0 20px 18px;color:var(--muted);font-size:15.5px;font-weight:300}
+.final{text-align:center}
+.final .btn{max-width:360px;margin-top:22px}
+footer{background:var(--pure);color:#a1a1af;padding:40px 0 120px;font-size:13.5px;font-weight:300;margin-top:8px}
+footer img{height:19px;width:auto;margin-bottom:20px}
+footer p{margin:0 0 10px;max-width:80ch}
+footer b{color:#fff;font-weight:400}
+footer nav{display:flex;gap:18px;margin:16px 0}
+footer a{color:#fff}
+@media (min-width:920px){footer{padding-bottom:44px}}
+
+/* ---------- Sticky mobile CTA ---------- */
+.sticky{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:50;transform:translateY(160%);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.sticky.show{transform:none}
+.sticky .btn{box-shadow:0 16px 30px -10px rgba(0,0,0,.55)}
+@media (min-width:920px){.sticky{display:none}}
+
+@keyframes stepIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.14)}100%{transform:scale(1)}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 4px rgba(47,213,138,.25)}50%{box-shadow:0 0 0 7px rgba(47,213,138,.06)}}
+@keyframes ring{to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="nav">
+    <a href="https://deepholistics.com/" aria-label="Deep Holistics home">
+      <img src="https://cdn.prod.website-files.com/6224f556a57abc5c34a2634b/67c72b3e75997c7ea03b98e5_logo-white-landscape.svg" alt="Deep Holistics" width="130" height="19">
+    </a>
+    <a class="call" href="tel:+918123547176">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+      <span>+91 81235 47176</span>
+    </a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- ============ HERO + QUIZ ============ -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="tag"><i aria-hidden="true"></i>Baseline · Bengaluru</span>
+        <h1>Free 60-second health check</h1>
+        <p class="sub">Feeling off, but your reports say “normal”?</p>
+        <p class="lede">Tell us how you feel and <b>see which of 100+ blood markers matter for you</b>. A health expert then calls you, free.</p>
+      </div>
+
+      <div class="quiz" id="quiz" aria-label="Free 60-second health check">
+        <div class="quiz-head">
+          <button type="button" class="back" id="backBtn" aria-label="Previous question" aria-hidden="true" tabindex="-1">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <div class="progress" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="6" id="progress"><span id="progressBar"></span></div>
+          <span class="counter" id="counter" aria-live="polite"><b id="counterNum">0</b> markers matched</span>
+        </div>
+        <div class="quiz-body" id="quizBody">
+          <noscript><p>Please enable JavaScript to take the health check, or call us on <a href="tel:+918123547176">+91 81235 47176</a>.</p></noscript>
+        </div>
+      </div>
+
+      <ul class="trust" aria-label="Why Baseline">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M10 3v6L5 19a1.5 1.5 0 0 0 1.3 2h11.4A1.5 1.5 0 0 0 19 19l-5-10V3"/><path d="M7.5 15h9"/></svg><div>100+ markers<small>from 2 samples</small></div></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg><div>Home collection<small>anywhere in Bengaluru</small></div></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div>Results in 48 h<small>on your dashboard</small></div></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg><div>NABL &amp; CAP<small>accredited partner lab</small></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section class="block">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="tag lav">How it works</span>
+        <h2 class="sec">From “something's off” to a clear plan</h2>
+        <p class="sec-sub">No clinic visit. Nothing to pay until you decide it's right for you.</p>
+      </div>
+      <div class="steps">
+        <div class="stepcard new"><span class="n">Today</span><h3>Free 60-second check</h3><p>Tell us how you feel and what you want. See which markers matter most for you.</p></div>
+        <div class="stepcard"><span class="n">Step 1</span><h3>Free expert call</h3><p>We explain what Baseline covers and whether it's right for you. No payment, no obligation.</p></div>
+        <div class="stepcard"><span class="n">Step 2</span><h3>2 samples at home</h3><p>One before breakfast, one after. Our accredited partner lab comes to you, anywhere in Bengaluru.</p></div>
+        <div class="stepcard"><span class="n">Step 3</span><h3>Results + doctor consult</h3><p>100+ results in 48 hours, then a 1-on-1 doctor consultation and your personal health plan.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHAT WE TEST ============ -->
+  <section class="block alt" id="panels">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="tag">What we test</span>
+        <h2 class="sec">100+ markers across 8 areas of your health</h2>
+        <p class="sec-sub" id="panelsSub">A routine check-up covers a slice of this. Baseline looks at the whole picture, in normal <em>and</em> optimal ranges.</p>
+      </div>
+      <div class="panels">
+        <div class="panel" data-panel="heart"><span class="ftag">For you</span><span class="pi" aria-hidden="true">❤️</span><h3>Heart health</h3><p>16 <small>markers</small></p></div>
+        <div class="panel" data-panel="metabolic"><span class="ftag">For you</span><span class="pi" aria-hidden="true">⚡</span><h3>Metabolic health</h3><p>7 <small>markers</small></p></div>
+        <div class="panel" data-panel="hormones"><span class="ftag">For you</span><span class="pi" aria-hidden="true">🧬</span><h3>Hormones</h3><p>5 <small>markers</small></p></div>
+        <div class="panel" data-panel="thyroid"><span class="ftag">For you</span><span class="pi" aria-hidden="true">🦋</span><h3>Thyroid</h3><p>9 <small>markers</small></p></div>
+        <div class="panel" data-panel="vitamins"><span class="ftag">For you</span><span class="pi" aria-hidden="true">🥦</span><h3>Vitamins &amp; minerals</h3><p>20 <small>markers</small></p></div>
+        <div class="panel" data-panel="liver"><span class="ftag">For you</span><span class="pi" aria-hidden="true">💧</span><h3>Liver &amp; kidney</h3><p>16 <small>markers</small></p></div>
+        <div class="panel" data-panel="inflammation"><span class="ftag">For you</span><span class="pi" aria-hidden="true">🔥</span><h3>Inflammation</h3><p>3 <small>markers</small></p></div>
+        <div class="panel" data-panel="blood"><span class="ftag">For you</span><span class="pi" aria-hidden="true">🩸</span><h3>Blood &amp; immunity</h3><p>28 <small>markers</small></p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMPARISON ============ -->
+  <section class="block">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="tag lav">Not a routine check-up</span>
+        <h2 class="sec">What a typical full-body package misses</h2>
+        <p class="sec-sub">“Normal” on a basic report can still hide early drifts. Here's the difference.</p>
+      </div>
+      <div class="compare-wrap">
+        <table class="compare">
+          <thead><tr><th scope="col"></th><th scope="col">Typical check-up</th><th scope="col" class="us">Baseline</th></tr></thead>
+          <tbody>
+            <tr><td>Samples</td><td class="them">Usually 1</td><td class="us">2: before &amp; after breakfast</td></tr>
+            <tr><td>Heart</td><td class="them">Cholesterol (LDL, HDL)</td><td class="us">+ ApoB, Lp(a), sdLDL, ApoA1</td></tr>
+            <tr><td>Blood sugar</td><td class="them">Glucose, HbA1c</td><td class="us">+ fasting &amp; post-meal insulin, HOMA-IR</td></tr>
+            <tr><td>Inflammation</td><td class="them">Rarely tested</td><td class="us">hs-CRP, IL-6, homocysteine</td></tr>
+            <tr><td>Hormones</td><td class="them">Rarely tested</td><td class="us">Testosterone, SHBG, DHEA-S, cortisol</td></tr>
+            <tr><td>Results</td><td class="them">Normal range only</td><td class="us">Normal + optimal ranges</td></tr>
+            <tr><td>After</td><td class="them">A PDF</td><td class="us">Doctor consult + health plan</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Typical = common full-body packages; what's included varies by lab and package.</p>
+    </div>
+  </section>
+
+  <!-- ============ EXPERTS ============ -->
+  <section class="block alt">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="tag">Our experts</span>
+        <h2 class="sec">Built by experts, backed by science</h2>
+        <p class="sec-sub">Developed with top doctors and specialists, so every insight is accurate, actionable and trusted.</p>
+      </div>
+      <div class="experts">
+        <div class="expert">
+          <img src="https://cdn.prod.website-files.com/6224f556a57abc5c34a2634b/68e0c1ba1e4bf47531a9063d_VIshal%20-%201.avif" alt="Dr. Vishal US Rao" width="120" height="120" loading="lazy">
+          <div><h3>Dr. Vishal US Rao</h3><span class="tag">Principal Scientific Advisor</span><p class="cred">MS, FRCS (Glasgow), FACS (USA), Fellow of the Royal Society of Medicine</p></div>
+        </div>
+        <div class="expert">
+          <img src="https://cdn.prod.website-files.com/6224f556a57abc5c34a2634b/68e0c1cba48d7441aec3ae3f_Wasim%20-%201.jpg" alt="Dr. Wasim Mohideen" width="120" height="120" loading="lazy">
+          <div><h3>Dr. Wasim Mohideen</h3><span class="tag lav">Chief Wellness Officer</span><p class="cred">MBBS, MRCGP [INT], DFM (RCGP, UK), Dip IBLM, AFMCP (IFM)</p></div>
+        </div>
+      </div>
+      <!-- REVIEWS: add 2–3 real customer quotes here (name, age, one line on what they found). Written quotes convert better than links to Instagram. -->
+    </div>
+  </section>
+
+  <!-- ============ OFFER ============ -->
+  <section class="block">
+    <div class="wrap">
+      <div class="offer">
+        <div>
+          <span class="tag dark">What's included</span>
+          <h2 class="sec">This isn't a check-up. It's your starting point.</h2>
+          <ul>
+            <li>100+ biomarker blood test from 2 home samples</li>
+            <li>1-on-1 doctor consultation on your results</li>
+            <li>Personal plan: nutrition, exercise, sleep, stress, supplements</li>
+            <li>All results in one dashboard, tracked over every retest</li>
+            <li>DH reward points and member discounts</li>
+          </ul>
+        </div>
+        <div class="price-box">
+          <div class="price"><b>₹9,999</b><s>₹19,999</s><span class="tag">50% off · launch price</span></div>
+          <p>Everything above, one price. Start with the free 60-second check and a free call. No payment needed.</p>
+          <a href="#quiz" class="btn btn-light" data-to-quiz>Start my free check <span class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="block alt">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="tag lav">FAQs</span>
+        <h2 class="sec">Before we call you</h2>
+      </div>
+      <div class="faq">
+        <details><summary>Is the health check and the call really free?</summary><p>Yes. The 60-second check and the call with our health expert are free, with no payment and no obligation. You only pay if you decide to book Baseline.</p></details>
+        <details><summary>Do I need to fast before the test?</summary><p>Yes, for the first sample, which is taken before breakfast. The second sample is taken after breakfast. Your health expert will confirm the exact timings on your call.</p></details>
+        <details><summary>Who collects my sample, and where?</summary><p>Our NABL and CAP accredited partner lab collects both samples at your home, anywhere in Bengaluru. No centre visit needed.</p></details>
+        <details><summary>When do I get my results?</summary><p>Within 48 hours of collection, on your dashboard. Then we book your 1-on-1 doctor consultation.</p></details>
+        <details><summary>Is this a diagnosis?</summary><p>No. Baseline is for preventive insight and health optimisation. It complements your doctor; it doesn't replace them.</p></details>
+        <!-- ADD: "Can I reschedule or cancel?" once your reschedule and refund policy is final. -->
+      </div>
+    </div>
+  </section>
+
+  <section class="block final">
+    <div class="wrap">
+      <span class="tag">Free 60-second health check</span>
+      <h2 class="sec">Your health deserves a clear starting point</h2>
+      <p class="sec-sub">5 quick questions. Your personal marker map. A free call with a health expert.</p>
+      <a href="#quiz" class="btn btn-dark" data-to-quiz>Start my free check <span class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img src="https://cdn.prod.website-files.com/6224f556a57abc5c34a2634b/67c72b3e75997c7ea03b98e5_logo-white-landscape.svg" alt="Deep Holistics" width="130" height="19" loading="lazy">
+    <p><b>Home collection across Bengaluru</b> · <a href="tel:+918123547176">+91 81235 47176</a> · <a href="mailto:support@deepholistics.com">support@deepholistics.com</a></p>
+    <!-- CHECK: point these at your real policy pages before going live. -->
+    <nav><a href="https://deepholistics.com/privacy-policy">Privacy Policy</a><a href="https://deepholistics.com/terms">Terms of Service</a></nav>
+    <p>Deep Holistics is a technology platform. It is not a laboratory or a medical provider. Lab tests are carried out by independent accredited partner labs. Nothing on this page is medical advice or a diagnosis.</p>
+    <p>© Baseline Life Sciences Private Limited</p>
+  </div>
+</footer>
+
+<div class="sticky" id="sticky">
+  <a href="#quiz" class="btn btn-dark" data-to-quiz>Free 60-second health check <span class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></a>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ================================================================
+     1. CONFIG: edit these before going live
+     ================================================================ */
+  var CONFIG = {
+    // Where leads are POSTed as JSON (your CRM, Zapier/Make webhook, or backend).
+    // Leave empty while testing: the lead is printed to the browser console instead.
+    LEAD_ENDPOINT: '',
+    // Google Ads lead conversion, e.g. 'AW-123456789/AbCdEfGhIj'. Needs gtag.js on the page.
+    // Only fires for leads inside your service area, so Smart Bidding learns from real leads.
+    GADS_SEND_TO: '',
+    BOOK_URL: 'https://deepholistics.com/dh-baseline-landing#pay',
+    WHATSAPP: '918123547176',
+    // Pin codes you collect in. '560' covers Bengaluru city; add exact codes or prefixes as needed.
+    SERVICEABLE_PIN_PREFIXES: ['560'],
+    PRICE: '₹9,999'
+  };
+
+  /* ================================================================
+     2. QUIZ CONTENT
+     The answer → marker mapping below is a starting point.
+     Have your medical team review it before launch.
+     ================================================================ */
+  var FEEL = [
+    { v: 'tired',  e: '😩', l: 'Tired all the time' },
+    { v: 'fog',    e: '🧠', l: 'Brain fog' },
+    { v: 'sick',   e: '🤧', l: 'Getting sick often' },
+    { v: 'sleep',  e: '😴', l: 'Poor sleep' },
+    { v: 'weight', e: '⚖️', l: "Weight won't budge" },
+    { v: 'mood',   e: '😟', l: 'Stressed or low mood' },
+    { v: 'gut',    e: '🌀', l: 'Bloating or gut issues' },
+    { v: 'hair',   e: '💇', l: 'Hair fall or dull skin' },
+    { v: 'drive',  e: '📉', l: 'Low drive or libido' },
+    { v: 'aches',  e: '🦴', l: 'Aches or stiff joints' },
+    { v: 'fine',   e: '🙂', l: 'I feel fine, just want to know more', exclusive: true }
+  ];
+  var GOALS = [
+    { v: 'energy',    e: '⚡', l: 'More energy' },
+    { v: 'focus',     e: '🎯', l: 'Sharper focus' },
+    { v: 'weight',    e: '🏃', l: 'Lose weight' },
+    { v: 'heart',     e: '❤️', l: 'Protect my heart' },
+    { v: 'hormones',  e: '🧬', l: 'Balance hormones' },
+    { v: 'fitness',   e: '💪', l: 'Get fitter & stronger' },
+    { v: 'longevity', e: '🌱', l: 'Live longer, healthier', wide: true }
+  ];
+  var FAMILY = [
+    { v: 'diabetes',    e: '🍬', l: 'Diabetes' },
+    { v: 'heart',       e: '💔', l: 'Heart disease or stroke' },
+    { v: 'bp',          e: '🩺', l: 'High blood pressure' },
+    { v: 'cholesterol', e: '🧪', l: 'High cholesterol' },
+    { v: 'thyroid',     e: '🦋', l: 'Thyroid problems' },
+    { v: 'none',        e: '🤷', l: 'None / not sure', exclusive: true }
+  ];
+  var LAST = [
+    { v: 'recent', e: '🗓️', l: 'In the last 6 months' },
+    { v: 'year',   e: '⏳', l: '6–12 months ago' },
+    { v: 'old',    e: '🕰️', l: 'Over a year ago' },
+    { v: 'never',  e: '✨', l: 'Never had a full one' }
+  ];
+  var DECADES = [['20s', 25, 18, 29], ['30s', 35, 30, 39], ['40s', 45, 40, 49], ['50s', 55, 50, 59], ['60+', 65, 60, 80]];
+
+  var PANELS = {
+    heart:        { name: 'Heart health',        icon: '❤️', total: 16 },
+    metabolic:    { name: 'Metabolic health',    icon: '⚡', total: 7 },
+    hormones:     { name: 'Hormones',            icon: '🧬', total: 5 },
+    thyroid:      { name: 'Thyroid',             icon: '🦋', total: 9 },
+    vitamins:     { name: 'Vitamins & minerals', icon: '🥦', total: 20 },
+    liver:        { name: 'Liver & kidney',      icon: '💧', total: 16 },
+    inflammation: { name: 'Inflammation',        icon: '🔥', total: 3 },
+    blood:        { name: 'Blood & immunity',    icon: '🩸', total: 28 }
+  };
+
+  function M(panel) { var out = []; for (var i = 1; i < arguments.length; i++) out.push([panel, arguments[i]]); return out; }
+  function J() { return [].concat.apply([], arguments); }
+  var MAP = {
+    'feel:tired':  J(M('vitamins', 'Vitamin B12', 'Vitamin D'), M('thyroid', 'TSH', 'Free T3'), M('blood', 'Haemoglobin'), M('hormones', 'Cortisol')),
+    'feel:fog':    J(M('vitamins', 'Vitamin B12', 'Folate (B9)'), M('metabolic', 'Fasting insulin', 'HOMA-IR'), M('thyroid', 'Free T4')),
+    'feel:sick':   J(M('blood', 'White blood cells', 'Lymphocytes'), M('vitamins', 'Vitamin D', 'Zinc', 'Selenium'), M('inflammation', 'hs-CRP')),
+    'feel:sleep':  J(M('hormones', 'Cortisol'), M('vitamins', 'Magnesium'), M('thyroid', 'TSH')),
+    'feel:weight': J(M('metabolic', 'Fasting insulin', 'HOMA-IR', 'HbA1c', 'Post-meal insulin'), M('thyroid', 'TSH')),
+    'feel:mood':   J(M('hormones', 'Cortisol', 'DHEA-S'), M('vitamins', 'Vitamin D', 'Vitamin B12'), M('thyroid', 'Free T3')),
+    'feel:gut':    J(M('liver', 'ALT', 'AST'), M('vitamins', 'Vitamin B12'), M('inflammation', 'hs-CRP')),
+    'feel:hair':   J(M('thyroid', 'TSH'), M('vitamins', 'Zinc', 'Biotin (B7)', 'Vitamin D'), M('blood', 'Haemoglobin')),
+    'feel:drive':  J(M('hormones', 'Testosterone', 'SHBG', 'DHEA-S', 'Cortisol')),
+    'feel:aches':  J(M('inflammation', 'hs-CRP', 'IL-6'), M('vitamins', 'Vitamin D', 'Magnesium')),
+    'feel:fine':   J(M('heart', 'ApoB'), M('metabolic', 'HbA1c'), M('vitamins', 'Vitamin D', 'Vitamin B12'), M('inflammation', 'hs-CRP')),
+    'goal:energy':    J(M('vitamins', 'Vitamin B12', 'Vitamin D', 'Magnesium'), M('thyroid', 'TSH', 'Free T3'), M('blood', 'Haemoglobin')),
+    'goal:focus':     J(M('vitamins', 'Vitamin B12', 'Folate (B9)'), M('metabolic', 'Fasting insulin', 'HOMA-IR'), M('thyroid', 'Free T4')),
+    'goal:weight':    J(M('metabolic', 'Fasting insulin', 'HOMA-IR', 'HbA1c', 'Post-meal insulin'), M('thyroid', 'TSH', 'Free T3'), M('hormones', 'Cortisol')),
+    'goal:heart':     J(M('heart', 'ApoB', 'Lp(a)', 'sdLDL', 'ApoA1'), M('inflammation', 'hs-CRP', 'Homocysteine')),
+    'goal:hormones':  J(M('hormones', 'Testosterone', 'SHBG', 'DHEA-S', 'Cortisol'), M('thyroid', 'TSH', 'Free T3', 'Free T4')),
+    'goal:fitness':   J(M('hormones', 'Testosterone', 'Cortisol'), M('vitamins', 'Vitamin D', 'Magnesium'), M('blood', 'Haemoglobin'), M('inflammation', 'hs-CRP')),
+    'goal:longevity': J(M('heart', 'ApoB', 'Lp(a)'), M('metabolic', 'HOMA-IR', 'HbA1c'), M('inflammation', 'hs-CRP', 'IL-6', 'Homocysteine')),
+    'family:diabetes':    J(M('metabolic', 'HbA1c', 'Fasting insulin', 'HOMA-IR', 'Post-meal insulin')),
+    'family:heart':       J(M('heart', 'ApoB', 'Lp(a)', 'sdLDL'), M('inflammation', 'hs-CRP', 'Homocysteine')),
+    'family:bp':          J(M('liver', 'Creatinine', 'eGFR'), M('inflammation', 'Homocysteine'), M('heart', 'ApoB')),
+    'family:cholesterol': J(M('heart', 'ApoB', 'Lp(a)', 'sdLDL', 'ApoA1')),
+    'family:thyroid':     J(M('thyroid', 'TSH', 'Free T3', 'Free T4', 'T3/T4 ratio')),
+    'age:35': J(M('heart', 'ApoB'), M('metabolic', 'HbA1c')),
+    'age:40': J(M('heart', 'Lp(a)'), M('inflammation', 'hs-CRP'), M('metabolic', 'Fasting insulin')),
+    'age:50': J(M('inflammation', 'Homocysteine', 'IL-6'), M('vitamins', 'Vitamin B12'), M('liver', 'eGFR')),
+    // Used when someone skips every question: the essentials everyone gets walked through.
+    'base:essentials': J(M('heart', 'ApoB'), M('metabolic', 'HbA1c', 'Fasting insulin'), M('vitamins', 'Vitamin D', 'Vitamin B12'), M('thyroid', 'TSH'), M('inflammation', 'hs-CRP'))
+  };
+
+  var STEPS = ['feel', 'age', 'goal', 'family', 'last', 'analyse', 'lead', 'result'];
+  var PROGRESS = [6, 22, 38, 54, 70, 82, 92, 100];
+  var CALL_TIMES = [
+    { v: 'asap', l: 'ASAP', s: 'next free slot' },
+    { v: 'morning', l: 'Morning', s: '9–12' },
+    { v: 'afternoon', l: 'Afternoon', s: '12–5' },
+    { v: 'evening', l: 'Evening', s: '5–9 pm' }
+  ];
+  var ARROW = '<span class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span>';
+
+  /* ================================================================
+     3. STATE + HELPERS
+     ================================================================ */
+  function freshAnswers() { return { feel: [], age: 32, goal: [], family: [], last: null }; }
+  var state = { step: 0, started: false, ageSet: false, locked: false, callTime: 'asap', shown: 0, timers: [], a: freshAnswers(), lead: null };
+
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var quiz = $('#quiz'), body = $('#quizBody'), backBtn = $('#backBtn'), bar = $('#progressBar'),
+      prog = $('#progress'), counter = $('#counter'), counterNum = $('#counterNum'), sticky = $('#sticky');
+
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function find(list, v) { for (var i = 0; i < list.length; i++) if (list[i].v === v) return list[i]; return null; }
+  function labelOf(list, v) { var o = find(list, v); return o ? o.l : v; }
+  function listFor(field) { return field === 'feel' ? FEEL : field === 'goal' ? GOALS : field === 'family' ? FAMILY : LAST; }
+
+  window.dataLayer = window.dataLayer || [];
+  // Only step numbers and outcomes go to analytics. Never push health answers:
+  // Google doesn't allow health-based remarketing, and it keeps your tags clean.
+  function track(ev, extra) { var o = { event: ev }; if (extra) for (var k in extra) o[k] = extra[k]; window.dataLayer.push(o); }
+
+  var ATTR_KEYS = ['gclid', 'gbraid', 'wbraid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+  var attribution = (function () {
+    var out = {}, saved = {}, q;
+    try { q = new URLSearchParams(location.search); } catch (e) { q = { get: function () { return null; } }; }
+    try { saved = JSON.parse(sessionStorage.getItem('dh_attr') || '{}'); } catch (e) {}
+    ATTR_KEYS.forEach(function (k) { out[k] = q.get(k) || saved[k] || ''; });
+    try { sessionStorage.setItem('dh_attr', JSON.stringify(out)); } catch (e) {}
+    return out;
+  })();
+
+  /* ---------- Matching engine ---------- */
+  function activeKeys() {
+    var a = state.a, out = [];
+    a.feel.forEach(function (v) { out.push(['feel:' + v, labelOf(FEEL, v).toLowerCase()]); });
+    if (state.ageSet) {
+      var r = 'your age (' + a.age + ')';
+      if (a.age >= 35) out.push(['age:35', r]);
+      if (a.age >= 40) out.push(['age:40', r]);
+      if (a.age >= 50) out.push(['age:50', r]);
+    }
+    a.goal.forEach(function (v) { out.push(['goal:' + v, 'goal: ' + labelOf(GOALS, v).toLowerCase()]); });
+    a.family.forEach(function (v) { if (v !== 'none') out.push(['family:' + v, 'family history of ' + labelOf(FAMILY, v).toLowerCase()]); });
+    // Skipped everything? Still show a useful map once the quiz is done.
+    if (!out.length && state.step >= STEPS.indexOf('analyse')) out.push(['base:essentials', 'core markers for everyone']);
+    return out;
+  }
+  function computeMatches() {
+    var map = {}, order = [];
+    activeKeys().forEach(function (pair) {
+      (MAP[pair[0]] || []).forEach(function (pm) {
+        var k = pm[0] + '|' + pm[1];
+        if (!map[k]) { map[k] = { panel: pm[0], name: pm[1], reasons: [] }; order.push(k); }
+        if (map[k].reasons.indexOf(pair[1]) < 0) map[k].reasons.push(pair[1]);
+      });
+    });
+    return order.map(function (k) { return map[k]; });
+  }
+  function grouped(matches) {
+    var g = {}, keys = [];
+    matches.forEach(function (m) {
+      if (!g[m.panel]) { g[m.panel] = { key: m.panel, markers: [], reasons: [] }; keys.push(m.panel); }
+      g[m.panel].markers.push(m.name);
+      m.reasons.forEach(function (r) { if (g[m.panel].reasons.indexOf(r) < 0) g[m.panel].reasons.push(r); });
+    });
+    return keys.map(function (k) { return g[k]; }).sort(function (x, y) {
+      return y.markers.length - x.markers.length || y.reasons.length - x.reasons.length;
+    });
+  }
+
+  /* ---------- Live marker counter ---------- */
+  function updateCounter() {
+    var n = computeMatches().length, from = state.shown;
+    state.shown = n;
+    if (n === from) return;
+    counter.classList.remove('bump'); void counter.offsetWidth; counter.classList.add('bump');
+    var t0 = performance.now(), dur = 420;
+    (function tick(t) {
+      var p = Math.min(1, (t - t0) / dur);
+      counterNum.textContent = Math.round(from + (n - from) * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(tick);
+    })(t0);
+  }
+
+  /* ================================================================
+     4. STEP TEMPLATES
+     ================================================================ */
+  function head(i, title, hint) {
+    return '<p class="q-kicker">Question ' + (i + 1) + ' of 5</p>' +
+      '<h2 class="q-title" tabindex="-1">' + title + '</h2>' +
+      (hint ? '<p class="q-hint">' + hint + '</p>' : '');
+  }
+  function optBtn(o, pressed) {
+    return '<button type="button" class="opt' + (o.exclusive || o.wide ? ' wide' : '') + '" data-opt="' + o.v + '" aria-pressed="' + (pressed ? 'true' : 'false') + '">' +
+      '<span class="opt-emoji" aria-hidden="true">' + o.e + '</span><span class="opt-label">' + esc(o.l) + '</span>' +
+      '<span class="opt-check" aria-hidden="true"></span></button>';
+  }
+  function nextBtn(label) { return '<div class="step-foot"><button type="button" class="btn btn-dark" data-action="next">' + (label || 'Continue') + ARROW + '</button></div>'; }
+  function multiStep(i, field, title, hint) {
+    var sel = state.a[field];
+    return '<div class="step sticky-foot" data-kind="multi" data-field="' + field + '">' + head(i, title, hint) +
+      '<div class="opts opts-grid" role="group" aria-label="' + esc(title) + '">' +
+      listFor(field).map(function (o) { return optBtn(o, sel.indexOf(o.v) > -1); }).join('') + '</div>' +
+      '<p class="insight" aria-live="polite"></p>' + nextBtn() + '</div>';
+  }
+  function singleStep(i, field, title, hint) {
+    var sel = state.a[field];
+    return '<div class="step sticky-foot" data-kind="single" data-field="' + field + '">' + head(i, title, hint) +
+      '<div class="opts opts-grid" role="group" aria-label="' + esc(title) + '">' +
+      listFor(field).map(function (o) { return optBtn(o, sel === o.v); }).join('') + '</div>' + nextBtn() + '</div>';
+  }
+
+  var RENDER = {
+    feel: function () { return multiStep(0, 'feel', 'How have you been feeling lately?', 'Pick everything that sounds like you.'); },
+    age: function () {
+      return '<div class="step" data-kind="age">' + head(1, 'How old are you?', 'What we look at changes with each decade.') +
+        '<div class="age-dial">' +
+          '<button type="button" class="age-step" data-action="age-dec" aria-label="One year younger">−</button>' +
+          '<span class="age-out"><output id="ageOut" for="ageRange">' + state.a.age + '</output><small>years</small></span>' +
+          '<button type="button" class="age-step" data-action="age-inc" aria-label="One year older">+</button>' +
+        '</div>' +
+        '<input type="range" class="range" id="ageRange" min="18" max="80" step="1" value="' + state.a.age + '" aria-label="Your age">' +
+        '<div class="decades" role="group" aria-label="Jump to an age group">' +
+          DECADES.map(function (d) { return '<button type="button" class="decade" data-action="decade" data-age="' + d[1] + '" aria-pressed="false">' + d[0] + '</button>'; }).join('') +
+        '</div>' +
+        '<p class="insight" id="ageNote" aria-live="polite"></p>' + nextBtn() + '</div>';
+    },
+    goal: function () { return multiStep(2, 'goal', 'What are your health goals?', 'Pick all that matter to you right now.'); },
+    family: function () { return multiStep(3, 'family', 'Does anything run in your family?', 'Parents, brothers or sisters. Pick all that apply.'); },
+    last: function () { return singleStep(4, 'last', 'When was your last full blood test?', 'Any full-body package counts.'); },
+    analyse: function () {
+      var lines = ["Reading how you've been feeling", 'Matching to 100+ biomarkers', 'Adding your age and family history', 'Building your health map'];
+      return '<div class="step analyse">' +
+        '<div class="ring"><svg viewBox="0 0 80 80" aria-hidden="true"><circle class="bg" cx="40" cy="40" r="34"/><circle class="fg" id="ringFg" cx="40" cy="40" r="34"/></svg><span class="ring-num" id="ringNum">0%</span></div>' +
+        '<h2 class="q-title" tabindex="-1">Building your health map…</h2>' +
+        '<ul class="checklist">' + lines.map(function (l) { return '<li><i aria-hidden="true"></i>' + l + '</li>'; }).join('') + '</ul></div>';
+    },
+    lead: function () {
+      var m = computeMatches(), g = grouped(m), n = m.length;
+      return '<div class="step">' +
+        '<p class="q-kicker">Your results are ready</p>' +
+        '<h2 class="q-title" tabindex="-1">We matched <span class="hl">' + n + ' markers</span> to you</h2>' +
+        '<p class="q-hint">Across ' + g.length + ' area' + (g.length > 1 ? 's' : '') + ' of your health. Tell us how to reach you to see them now. A health expert will call to walk you through them, free.</p>' +
+        '<div class="preview" aria-hidden="true"><div class="preview-cards">' + g.slice(0, 2).map(panelCard).join('') + '</div>' +
+          '<div class="preview-lock"><span>🔒 Unlocks instantly</span></div></div>' +
+        '<form id="leadForm" novalidate>' +
+          '<div class="field"><label for="fName">First name</label><input class="input" id="fName" name="name" autocomplete="given-name" placeholder="Your name" maxlength="60" required><p class="err" id="eName">Please tell us your name.</p></div>' +
+          '<div class="two">' +
+            '<div class="field"><label for="fPhone">Mobile</label><div class="phone"><span>+91</span><input class="input" id="fPhone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="98765 43210" maxlength="14" required></div><p class="err" id="ePhone">Enter a 10-digit mobile number.</p></div>' +
+            '<div class="field"><label for="fPin">Pin code</label><input class="input" id="fPin" name="pin" inputmode="numeric" autocomplete="postal-code" placeholder="560034" maxlength="6" required><p class="hint" id="pinHint"></p><p class="err" id="ePin">Enter a 6-digit pin code.</p></div>' +
+          '</div>' +
+          '<div class="field"><span class="label" id="ctLabel">Best time to call</span><div class="seg" role="group" aria-labelledby="ctLabel">' +
+            CALL_TIMES.map(function (c) { return '<button type="button" data-action="calltime" data-v="' + c.v + '" aria-pressed="' + (state.callTime === c.v) + '">' + c.l + '<small>' + c.s + '</small></button>'; }).join('') +
+          '</div></div>' +
+          '<label class="consent"><input type="checkbox" id="fConsent" name="consent" checked><span>I agree that Deep Holistics may call or WhatsApp me about Baseline. See our <a href="https://deepholistics.com/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>. I can opt out anytime.</span></label>' +
+          '<p class="err" id="eConsent" style="margin-top:-8px;margin-bottom:12px">Please tick the box so we can call you.</p>' +
+          '<button type="submit" class="btn btn-dark" id="submitBtn">See my results' + ARROW + '</button>' +
+          '<p class="micro"><span>✓ No payment</span><span>✓ No obligation</span><span>✓ We call 9 am–9 pm</span></p>' +
+        '</form></div>';
+    },
+    result: function () {
+      var L = state.lead, matches = computeMatches(), g = grouped(matches), n = matches.length;
+      var first = esc(L.name.split(/\s+/)[0]);
+      var lastNote = {
+        recent: 'Even with a recent test, most packages skip insulin, ApoB and hormones.',
+        year: "It's been a while, so a fresh baseline shows where you stand today.",
+        old: "Over a year is a long gap. Now's a good time to reset your baseline.",
+        never: 'Your first Baseline becomes the benchmark for every retest after it.'
+      }[state.a.last] || '';
+      var callout = L.serviceable
+        ? '<div class="callout good"><span class="ic" aria-hidden="true">📞</span><div>Our health expert will call <b>+91 ' + fmtPhone(L.phone) + '</b> ' + whenText() + '. Free, no payment, no obligation.</div></div>'
+        : '<div class="callout warn"><span class="ic" aria-hidden="true">📍</span><div>We don\'t collect at home in <b>' + esc(L.pin) + '</b> yet. Baseline is Bengaluru-only for now. We\'ve saved your details and will tell you as soon as we reach your area.</div></div>';
+      var top = g.slice(0, 4), rest = g.slice(4);
+      return '<div class="step">' +
+        '<p class="q-kicker">Your Baseline health map</p>' +
+        '<h2 class="q-title" tabindex="-1">' + first + ', these <span class="hl">' + n + ' markers</span> matter most for you</h2>' +
+        '<p class="q-hint">Baseline tests all 100+. These are the ones your health expert will walk you through first. ' + lastNote + '</p>' +
+        callout +
+        top.map(panelCard).join('') +
+        (rest.length ? '<details class="more"><summary>+ ' + rest.length + ' more area' + (rest.length > 1 ? 's' : '') + ' matched</summary>' + rest.map(panelCard).join('') + '</details>' : '') +
+        '<div class="result-ctas">' +
+          (L.serviceable ? '<a class="btn btn-dark" href="' + CONFIG.BOOK_URL + '" data-action="book"><span class="stack">Skip the call, book now · ' + CONFIG.PRICE + '<small>Home collection, 48 h results, doctor consult included</small></span>' + ARROW + '</a>' : '') +
+          '<a class="btn btn-ghost" href="https://wa.me/' + CONFIG.WHATSAPP + '?text=' + encodeURIComponent("Hi, I just took the Baseline health check and I'd like to know more.") + '" target="_blank" rel="noopener" data-action="whatsapp"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#24d366" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/><path fill="#fff" d="M8.6 7.3c.2-.4.4-.4.6-.4h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.8-1c.2-.3.4-.2.6-.1l1.8.9c.3.1.4.2.5.3.1.2.1.8-.2 1.5-.3.7-1.6 1.4-2.2 1.4-.6.1-1.1.3-3.8-.8-3.2-1.3-5.2-4.5-5.3-4.7-.2-.2-1.3-1.7-1.3-3.2s.8-2.3 1.1-2.6z"/></svg>Chat with us on WhatsApp now</a>' +
+        '</div>' +
+        '<p class="fine">This is not a diagnosis. It shows which markers in Baseline relate to what you told us, so your call can focus on what matters to you. <button type="button" class="linkbtn" data-action="restart">Retake the check</button></p>' +
+        '</div>';
+    }
+  };
+
+  function panelCard(gr) {
+    var p = PANELS[gr.key], pct = Math.max(8, Math.round(gr.markers.length / p.total * 100));
+    return '<article class="pcard"><div class="pcard-head"><span class="pcard-icon" aria-hidden="true">' + p.icon + '</span>' +
+      '<div><h3>' + esc(p.name) + '</h3><p>' + gr.markers.length + ' of ' + p.total + ' markers matched to you</p></div></div>' +
+      '<div class="meter"><span style="width:' + pct + '%"></span></div>' +
+      '<div class="chips">' + gr.markers.map(function (m) { return '<span class="chip">' + esc(m) + '</span>'; }).join('') + '</div>' +
+      '<p class="why"><b>Because of:</b> ' + gr.reasons.slice(0, 3).map(esc).join(' · ') + (gr.reasons.length > 3 ? ' +' + (gr.reasons.length - 3) + ' more' : '') + '</p></article>';
+  }
+
+  function fmtPhone(p) { return p.slice(0, 5) + ' ' + p.slice(5); }
+  function whenText() {
+    var h = new Date().getHours();
+    switch (state.callTime) {
+      case 'morning': return 'between 9 am and 12 pm';
+      case 'afternoon': return 'between 12 and 5 pm';
+      case 'evening': return 'between 5 and 9 pm';
+      default: return (h >= 21 || h < 9) ? 'first thing tomorrow morning' : 'shortly';
+    }
+  }
+
+  /* ================================================================
+     5. RENDER + NAVIGATION
+     ================================================================ */
+  function render(focus) {
+    state.timers.forEach(clearTimeout); state.timers = [];
+    var id = STEPS[state.step];
+    body.innerHTML = RENDER[id]();
+    var hideBack = state.step === 0 || id === 'analyse' || id === 'result';
+    backBtn.setAttribute('aria-hidden', hideBack ? 'true' : 'false');
+    backBtn.tabIndex = hideBack ? -1 : 0;
+    bar.style.width = PROGRESS[state.step] + '%';
+    prog.setAttribute('aria-valuenow', PROGRESS[state.step]);
+    document.body.classList.toggle('quiz-active', state.started);
+    if (AFTER[id]) AFTER[id]();
+    updateCounter();
+    if (focus) {
+      var t = $('.q-title', body); if (t) t.focus({ preventScroll: true });
+      var r = quiz.getBoundingClientRect();
+      if (r.top < 60 || r.top > window.innerHeight * 0.35) quiz.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+  function go(i) {
+    state.step = i;
+    render(true);
+    track('quiz_step', { quiz_step: i + 1, quiz_step_name: STEPS[i] });
+  }
+  function markStarted() {
+    if (state.started) return;
+    state.started = true;
+    document.body.classList.add('quiz-active');
+    track('quiz_start');
+  }
+
+  var AFTER = {
+    feel: function () { syncMulti($('.step', body), 'feel', null); },
+    goal: function () { syncMulti($('.step', body), 'goal', null); },
+    family: function () { syncMulti($('.step', body), 'family', null); },
+    age: function () { syncAge(); },
+    analyse: function () {
+      var items = $$('.checklist li', body), num = $('#ringNum'), fg = $('#ringFg'), dur = 2600, t0 = performance.now();
+      fg.style.animation = 'ring ' + dur + 'ms cubic-bezier(.4,.1,.3,1) forwards';
+      (function tick(t) {
+        if (!document.body.contains(num)) return;
+        var p = Math.min(1, (t - t0) / dur);
+        num.textContent = Math.round(p * 100) + '%';
+        if (p < 1) requestAnimationFrame(tick);
+      })(t0);
+      items.forEach(function (li, i) { state.timers.push(setTimeout(function () { li.classList.add('done'); }, 450 + i * 600)); });
+      state.timers.push(setTimeout(function () { go(STEPS.indexOf('lead')); }, dur + 350));
+      track('quiz_complete');
+    },
+    result: function () {
+      var keys = grouped(computeMatches()).map(function (g) { return g.key; });
+      $$('[data-panel]').forEach(function (el) { el.classList.toggle('is-matched', keys.indexOf(el.getAttribute('data-panel')) > -1); });
+      $('#panelsSub').innerHTML = 'Areas tagged <b>For you</b> are the ones linked to your answers. Baseline checks all of them, in normal <em>and</em> optimal ranges.';
+      sticky.classList.remove('show');
+    }
+  };
+
+  /* ---------- Multi-select: Continue is always available, even with nothing picked ---------- */
+  function syncMulti(step, field, focusV) {
+    var n = state.a[field].length, btn = $('[data-action="next"]', step), ins = $('.insight', step);
+    btn.innerHTML = (n > 1 ? 'Continue · ' + n + ' selected' : 'Continue') + ARROW;
+    if (!focusV) { ins.innerHTML = ''; return; }
+    var o = find(listFor(field), focusV), names = [];
+    (MAP[field + ':' + focusV] || []).forEach(function (pm) { if (names.indexOf(pm[1]) < 0) names.push(pm[1]); });
+    if (!names.length) { ins.innerHTML = '<span aria-hidden="true">👍</span><span>No problem. We\'ll still check the essentials for you.</span>'; return; }
+    names = names.slice(0, 3);
+    var list = names.length > 1 ? names.slice(0, -1).map(function (x) { return '<b>' + esc(x) + '</b>'; }).join(', ') + ' and <b>' + esc(names[names.length - 1]) + '</b>' : '<b>' + esc(names[0]) + '</b>';
+    ins.innerHTML = '<span aria-hidden="true">🔬</span><span>For “' + esc(o.l) + '” we look at ' + list + '.</span>';
+  }
+
+  function onOpt(btn) {
+    var step = btn.closest('.step'), field = step.getAttribute('data-field'), kind = step.getAttribute('data-kind'), v = btn.getAttribute('data-opt');
+    var list = listFor(field), opt = find(list, v);
+    markStarted();
+    if (kind === 'multi') {
+      var arr = state.a[field], i = arr.indexOf(v), focusV;
+      if (i > -1) { arr.splice(i, 1); focusV = arr[arr.length - 1] || null; }
+      else {
+        if (opt.exclusive) arr.length = 0;
+        else list.forEach(function (o) { var j; if (o.exclusive && (j = arr.indexOf(o.v)) > -1) arr.splice(j, 1); });
+        arr.push(v); focusV = v;
+      }
+      $$('[data-opt]', step).forEach(function (b) { b.setAttribute('aria-pressed', arr.indexOf(b.getAttribute('data-opt')) > -1 ? 'true' : 'false'); });
+      syncMulti(step, field, focusV);
+      updateCounter();
+    } else {
+      if (state.locked) return;
+      state.a[field] = state.a[field] === v ? null : v;
+      $$('[data-opt]', step).forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-opt') === state.a[field] ? 'true' : 'false'); });
+      updateCounter();
+      if (state.a[field]) {
+        state.locked = true;
+        setTimeout(function () { state.locked = false; go(state.step + 1); }, 320);
+      }
+    }
+  }
+
+  /* ---------- Age ---------- */
+  function setAge(v) {
+    state.a.age = Math.max(18, Math.min(80, v | 0));
+    state.ageSet = true;
+    markStarted();
+    syncAge();
+    updateCounter();
+  }
+  function syncAge() {
+    var a = state.a.age, out = $('#ageOut'), range = $('#ageRange'), note = $('#ageNote');
+    if (!out) return;
+    out.textContent = a;
+    range.value = a;
+    range.style.setProperty('--p', ((a - 18) / 62 * 100) + '%');
+    $$('.decade', body).forEach(function (b, i) { var d = DECADES[i]; b.setAttribute('aria-pressed', a >= d[2] && a <= d[3] ? 'true' : 'false'); });
+    var msg;
+    if (a < 35) msg = 'Great time to set your baseline. Every future retest gets compared to it.';
+    else if (a < 40) msg = 'From 35 we look closer at <b>ApoB</b> and <b>HbA1c</b>, which can drift quietly.';
+    else if (a < 50) msg = 'In your 40s we add <b>Lp(a)</b>, <b>hs-CRP</b> and <b>fasting insulin</b> to your focus list.';
+    else msg = 'After 50 we also focus on <b>homocysteine</b>, <b>IL-6</b>, <b>B12</b> and <b>kidney function</b>.';
+    note.innerHTML = '<span aria-hidden="true">🔬</span><span>' + msg + '</span>';
+  }
+
+  /* ---------- Lead form ---------- */
+  function cleanPhone(raw) {
+    var d = String(raw).replace(/\D/g, '');
+    if (d.length === 12 && d.indexOf('91') === 0) d = d.slice(2);
+    if (d.length === 11 && d.charAt(0) === '0') d = d.slice(1);
+    return d;
+  }
+  function isServiceable(pin) { return CONFIG.SERVICEABLE_PIN_PREFIXES.some(function (p) { return pin.indexOf(p) === 0; }); }
+  function checkPin(input) {
+    input.value = input.value.replace(/\D/g, '').slice(0, 6);
+    var hint = $('#pinHint'), v = input.value;
+    if (v.length < 6) { hint.className = 'hint'; hint.textContent = ''; return; }
+    if (isServiceable(v)) { hint.className = 'hint ok'; hint.textContent = '✓ We collect at home here'; }
+    else { hint.className = 'hint warn'; hint.textContent = 'Outside Bengaluru for now'; }
+  }
+  function showErr(id, on, input) { $('#' + id).classList.toggle('show', on); if (input) input.setAttribute('aria-invalid', on ? 'true' : 'false'); }
+
+  function onSubmit(e) {
+    e.preventDefault();
+    var f = e.target, name = f.name.value.trim(), phone = cleanPhone(f.phone.value), pin = f.pin.value.trim(), consent = f.consent.checked;
+    var okName = name.length >= 2, okPhone = /^[6-9]\d{9}$/.test(phone), okPin = /^\d{6}$/.test(pin);
+    showErr('eName', !okName, f.name); showErr('ePhone', !okPhone, f.phone); showErr('ePin', !okPin, f.pin); showErr('eConsent', !consent);
+    if (!(okName && okPhone && okPin && consent)) {
+      var bad = !okName ? f.name : !okPhone ? f.phone : !okPin ? f.pin : f.consent; bad.focus();
+      track('lead_form_error');
+      return;
+    }
+    var serviceable = isServiceable(pin);
+    var matches = computeMatches();
+    var leadId = 'q' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+    state.lead = { name: name, phone: phone, pin: pin, serviceable: serviceable };
+
+    var payload = {
+      lead_id: leadId,
+      source_page: 'dh-baseline-quiz',
+      submitted_at: new Date().toISOString(),
+      name: name, phone: '+91' + phone, pincode: pin, serviceable: serviceable,
+      best_time_to_call: state.callTime, consent_call_whatsapp: true,
+      answers: { feeling: state.a.feel, age: state.ageSet ? state.a.age : null, goals: state.a.goal, family_history: state.a.family, last_blood_test: state.a.last },
+      matched_markers: matches.map(function (m) { return m.name; }),
+      matched_panels: grouped(matches).map(function (g) { return g.key; }),
+      attribution: attribution,
+      landing_url: location.href.split('#')[0]
+    };
+
+    var btn = $('#submitBtn'); btn.disabled = true; btn.textContent = 'Unlocking your results…';
+    sendLead(payload).then(function () {
+      fireConversion(serviceable, phone, leadId);
+      go(STEPS.indexOf('result'));
+    });
+  }
+  function sendLead(payload) {
+    if (!CONFIG.LEAD_ENDPOINT) { console.info('[Baseline quiz] Lead captured (set CONFIG.LEAD_ENDPOINT to send it):', payload); return Promise.resolve(); }
+    var req = fetch(CONFIG.LEAD_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), keepalive: true })
+      .catch(function (err) { console.warn('[Baseline quiz] Lead send failed', err); });
+    return Promise.race([req, new Promise(function (r) { setTimeout(r, 4000); })]);
+  }
+  function fireConversion(serviceable, phone, leadId) {
+    track('lead_submit', { lead_serviceable: serviceable, lead_id: leadId });
+    if (serviceable && CONFIG.GADS_SEND_TO && typeof window.gtag === 'function') {
+      window.gtag('set', 'user_data', { phone_number: '+91' + phone }); // enhanced conversions for leads
+      window.gtag('event', 'conversion', { send_to: CONFIG.GADS_SEND_TO, transaction_id: leadId });
+    }
+  }
+
+  /* ================================================================
+     6. EVENTS
+     ================================================================ */
+  body.addEventListener('click', function (e) {
+    var t = e.target.closest('[data-opt],[data-action]');
+    if (!t || !body.contains(t)) return;
+    if (t.hasAttribute('data-opt')) return onOpt(t);
+    switch (t.getAttribute('data-action')) {
+      case 'next':
+        if (state.locked) return;
+        if (STEPS[state.step] === 'age') { state.ageSet = true; }
+        markStarted(); go(state.step + 1); break;
+      case 'age-dec': setAge(state.a.age - 1); break;
+      case 'age-inc': setAge(state.a.age + 1); break;
+      case 'decade': setAge(+t.getAttribute('data-age')); break;
+      case 'calltime':
+        state.callTime = t.getAttribute('data-v');
+        $$('[data-action="calltime"]', body).forEach(function (b) { b.setAttribute('aria-pressed', b === t ? 'true' : 'false'); });
+        break;
+      case 'book': track('book_click'); break;
+      case 'whatsapp': track('whatsapp_click'); break;
+      case 'restart':
+        state.a = freshAnswers();
+        state.ageSet = false; state.lead = null; state.callTime = 'asap';
+        $$('[data-panel]').forEach(function (el) { el.classList.remove('is-matched'); });
+        go(0); break;
+    }
+  });
+  body.addEventListener('input', function (e) {
+    var t = e.target;
+    if (t.id === 'ageRange') setAge(+t.value);
+    else if (t.name === 'pin') { checkPin(t); showErr('ePin', false, t); }
+    else if (t.name === 'phone') { t.value = t.value.replace(/[^\d\s+]/g, ''); showErr('ePhone', false, t); }
+    else if (t.name === 'name') showErr('eName', false, t);
+  });
+  body.addEventListener('change', function (e) { if (e.target.name === 'consent') showErr('eConsent', false); });
+  body.addEventListener('submit', function (e) { if (e.target.id === 'leadForm') onSubmit(e); });
+  body.addEventListener('keydown', function (e) {
+    if (STEPS[state.step] !== 'age' || e.target.id === 'ageRange') return;
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') { e.preventDefault(); setAge(state.a.age - 1); }
+    if (e.key === 'ArrowRight' || e.key === 'ArrowUp') { e.preventDefault(); setAge(state.a.age + 1); }
+  });
+  backBtn.addEventListener('click', function () {
+    if (backBtn.getAttribute('aria-hidden') === 'true') return;
+    var prev = state.step - 1;
+    if (STEPS[prev] === 'analyse') prev--;
+    if (prev >= 0) go(prev);
+  });
+
+  // Every CTA on the page leads back to the quiz: one conversion path, no leaks.
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('[data-to-quiz]');
+    if (!a) return;
+    e.preventDefault();
+    track('cta_to_quiz');
+    quiz.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    var t = $('.q-title', body); if (t) setTimeout(function () { t.focus({ preventScroll: true }); }, 500);
+  });
+
+  // Sticky mobile CTA: shows once the quiz scrolls out of view, hides after results.
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      var out = !entries[0].isIntersecting && entries[0].boundingClientRect.top < 0;
+      sticky.classList.toggle('show', out && STEPS[state.step] !== 'result');
+    }, { threshold: 0 }).observe(quiz);
+  }
+
+  render(false);
+})();
+</script>
+</body>
+</html>
